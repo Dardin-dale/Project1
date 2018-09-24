@@ -19,33 +19,57 @@
             <div class="card-body">
               <form class="form">
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <label for="char-name-input">Character Name</label>
                     <input type="text" class="form-control" id="char-name-input">
                   </div>
-                  <div class="col-md-4">
+
+                  <div class="col-md-3">
                       <label for="player-name-input">Player Name</label>
                     <input type="text" class="form-control" id="player-name-input">
                   </div>
-                  <div class="col-md-4">
-                      <label for="class-level-input">Class & Level</label>
-                      <input type="text" class="form-control" id="class-level-input">
+
+                  <div class="col-md-3">
+                    <label for="class-input">Class</label>
+                    <div class="input-group mb-3">
+                      <select class="custom-select" id="class-input">
+                        <option selected></option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                      <label for="level-input">Level</label>
+                    <input type="text" class="form-control" id="level-input">
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-md-3">
-                    <label for="race-input">Race</label>
-                    <input type="text" class="form-control" id="race-input">
+                    <label for="class-input">Race</label>
+                    <div class="input-group mb-3">
+                      <select class="custom-select" id="race-input">
+                        <option selected></option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                    </div>
                   </div>
+
                   <div class="col-md-3">
                     <label for="alignment-input">Alignment</label>
                     <input type="text" class="form-control" id="alignment-input">
                   </div>
+
                   <div class="col-md-3">
                     <label for="ep-input">Experience Points</label>
                     <input type="text" class="form-control" id="ep-input">
                   </div>
+
                   <div class="col-md-3">
                       <label for="dci-input">DCI number</label>
                       <input type="text" class="form-control" id="dci-input">
@@ -83,10 +107,17 @@
           <div class="card" id="skills-card">
             <div class="card-body">
               <h5 class="card-title">Skills</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Do these skills get rolled? or are these user inputs?</h6>
-              <button type="button" id="roll-skills-button" class="btn btn-dark">Roll</button>
-              <p>Acrobatics (Dex)</p>
-              <p>Animal Handling (Wis)</p>
+              <h6 class="card-subtitle mb-2 text-muted">Dev note: added dynamically?</h6>
+              
+              <div>
+                <label for="acrobatics-level">Acrobatics (Dex)</label>
+                <input type="text" class="form-control" id="acrobatics-level">
+              </div>
+
+              <div>
+                <label for="animal-level">Animal Handling (Wis)</label>
+                <input type="text" class="form-control" id="animal-level">
+              </div>
             </div>
           </div>
         </div>
