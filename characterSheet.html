@@ -54,6 +54,23 @@
 
                 <div class="row">
                   <div class="col-md-3">
+                    <label for="subclass-input">Subclass</label>
+                    <input type="text" class="form-control" id="player-name-input">
+                  </div>
+
+                  <div class="col-md-3">
+                    <label for="subclass-input">Proficiencies</label>
+                    <input type="text" class="form-control" id="player-name-input">
+                  </div>
+
+                  <div class="col-md-3">
+                      <label for="subclass-input">Saving Throws</label>
+                      <input type="text" class="form-control" id="player-name-input">
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-3">
                     <label for="level-input">Level</label>
                       <input type="text" class="form-control" id="level-input">
                   </div>
@@ -97,11 +114,40 @@
         <div class="col-md-3">
           <div class="card" id="roll-card">
             <div class="card-body">
-              <h5 class="card-title">Title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Dev note: Maybe we create these dynamically through JS, each skill with a random value</h6>
-              <button type="button" id="roll-skills-button" class="btn btn-dark">Roll</button>
-              <p>Strength 3</p>
-              <p>Dexterity 6</p>
+              <h5 class="card-title">Ability Scores</h5>
+              <div>
+              <button type="button" id="preset-button" class="btn btn-dark">Use Preset</button>
+              <button type="button" id="roll-button" class="btn btn-dark">Roll</button>
+              <div>
+                <label for="char-name-input">Strength</label>
+                <input type="text" class="form-control" id="strength-input">
+              </div>
+
+              <div>
+                <label for="char-name-input">Dexterity</label>
+                <input type="text" class="form-control" id="dexterity-input">
+              </div>
+
+              <div>
+                <label for="char-name-input">Constitution</label>
+                <input type="text" class="form-control" id="constitution-input">
+              </div>
+
+              <div>
+                <label for="char-name-input">Intelligence</label>
+                <input type="text" class="form-control" id="intelligence-input">
+              </div>
+
+              <div>
+                <label for="char-name-input">Wisdom</label>
+                <input type="text" class="form-control" id="wisdom-input">
+              </div>
+
+              <div>
+                <label for="char-name-input">Charisma</label>
+                <input type="text" class="form-control" id="charisma-input">
+              </div>
+              </div>
             </div>
           </div>
         </div>
@@ -110,17 +156,7 @@
           <div class="card" id="skills-card">
             <div class="card-body">
               <h5 class="card-title">Skills</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Dev note: added dynamically?</h6>
-              
-              <div>
-                <label for="acrobatics-level">Acrobatics (Dex)</label>
-                <input type="text" class="form-control" id="acrobatics-level">
-              </div>
-
-              <div>
-                <label for="animal-level">Animal Handling (Wis)</label>
-                <input type="text" class="form-control" id="animal-level">
-              </div>
+              <button type="button" id="add-skill-button" class="btn btn-dark">Add skill</button>
             </div>
           </div>
         </div>
@@ -143,10 +179,30 @@
           </div>
         </div>
       </div>
-      <button type="button" id="submit-char-sheet" class="btn btn-dark">Submit to Dungeon Master</button>
+
+    <div class="row">
+        <div class="col-md-6">
+          <div class="card" id="personality-card">
+            <div class="card-body">
+              <label for="personality-input">Proficiencies</label>
+              <textarea class="form-control" rows="3" id="personality-input"></textarea>
+
+              <label for="personality-input">Ideals</label>
+              <textarea class="form-control" rows="3" id="ideals-input"></textarea>
+
+              <label for="personality-input">Bonds</label>
+              <textarea class="form-control" rows="3" id="bonds-input"></textarea>
+
+              <label for="personality-input">Flaws</label>
+              <textarea class="form-control" rows="3" id="flaws-input"></textarea>
+            </div>
+          </div>
+        </div>
     </div>
 
+  </div>
 
+    <button type="button" id="submit-char-sheet" class="btn btn-dark">Submit to Dungeon Master</button>
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -155,6 +211,7 @@
     crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
     <script src="Assets/Javascript/characterSheet.js"></script>
   </body>
 </html>
