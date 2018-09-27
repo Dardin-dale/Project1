@@ -20,12 +20,24 @@
               <form class="form">
                 <div class="row">
                   <div class="col-md-3">
+                    <label for="class-input">Player Type</label>
+                      <div class="input-group mb-3">
+                        <select class="custom-select" id="playerType-input">
+                          <option selected></option>
+                          <option value="1">Player Character</option>
+                          <option value="1">Non-Player Character</option>
+                          <option value="1">Enemy</option>
+                        </select>
+                      </div>
+                  </div>
+
+                  <div class="col-md-3">
                     <label for="char-name-input">Character Name</label>
                     <input type="text" class="form-control" id="char-name-input">
                   </div>
 
                   <div class="col-md-3">
-                      <label for="player-name-input">Player Name</label>
+                    <label for="player-name-input">Player Name</label>
                     <input type="text" class="form-control" id="player-name-input">
                   </div>
 
@@ -38,19 +50,20 @@
                       </select>
                     </div>
                   </div>
-
-                  <div class="col-md-3">
-                      <label for="level-input">Level</label>
-                    <input type="text" class="form-control" id="level-input">
-                  </div>
                 </div>
 
                 <div class="row">
+                  <div class="col-md-3">
+                    <label for="level-input">Level</label>
+                      <input type="text" class="form-control" id="level-input">
+                  </div>
+
                   <div class="col-md-3">
                     <label for="class-input">Race</label>
                     <div class="input-group mb-3">
                       <select class="custom-select" id="race-input">
                         <option selected></option>
+                        <!--races from API generate here-->
                       </select>
                     </div>
                   </div>
@@ -63,11 +76,6 @@
                   <div class="col-md-3">
                     <label for="ep-input">Experience Points</label>
                     <input type="text" class="form-control" id="ep-input">
-                  </div>
-
-                  <div class="col-md-3">
-                      <label for="dci-input">DCI number</label>
-                      <input type="text" class="form-control" id="dci-input">
                   </div>
                 </div>
 
