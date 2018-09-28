@@ -1,26 +1,52 @@
-// Function for retrieving JSON content from the D&D API
-function callDD(charDataField, pageElement) {
+//FUNCTIONS
+// Retrieve JSON content from the D&D API
+function callDD(charDataField, pageElement, formFunction) {
     var queryURL = "http://www.dnd5eapi.co/api/" + charDataField;
-        
+
     $.ajax({
-        url: queryURL,
+        url: queryURL.toLowerCase(),
         method: "GET"
     }).then(function(response){
-        for(result of response.results){
+        formFunction(pageElement, response);
+    });
+}
+
+//Fills dropdown fields
+function createDropdown(pageElement, response){
+    for(result of response.results){
         var newClass = $("<option>").val(result.name);
         newClass.text(result.name);
         pageElement.append(newClass);
-        }
     }
-    );
 }
 
-function fillClass(){
-    callDD("classes", $("#class-input"));
-    callDD("races", $("#race-input"));
+//TODO: make these radio buttons instead of <p>
+function createP(pageElement, response){
+    pageElement.empty();
+    console.log(response);
+    for(result of response.proficiency_choices[0].from){
+        var newSkill = $("<p>").val(result.name);
+        newSkill.text(result.name);
+        pageElement.append(newSkill);
+    }
 }
 
-fillClass();
+function fillField(){
+    callDD("classes", $("#class-input"), createDropdown);
+    callDD("races", $("#race-input"), createDropdown);
+}
+
+
+//EVENTS
+//Populate fields related to class when class is chosen
+$("#class-input").on('change', function() {
+    var classChoice = $(this).val();
+    callDD("classes/" + classChoice, $("#skills"), createP);
+});
+
+fillField();
+
+
 
 
 
