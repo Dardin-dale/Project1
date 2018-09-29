@@ -78,21 +78,21 @@ var dataRef = firebase.database();
 
 // Initial Values
 var charName = "";
-var playerName = "";
+var playName = "";
 var level = 0;
 
 $("#submit-char-sheet").on("click", function(event) {
     event.preventDefault();
 
     charName = $("#char-name-input").val().trim();
-    playerName = $("#player-name-input").val().trim();
+    playName = $("#player-name-input").val().trim();
     level = $("#level-input").val().trim();
 
     // Code for the push
     dataRef.ref().child("Characters").push({
 
     charName: charName,
-    playerName: playerName,
+    playName: playName,
     level: level
     });
 });
