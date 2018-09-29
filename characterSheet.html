@@ -63,12 +63,6 @@
                     <input type="text" class="form-control" id="-input">
                   </div>
 
-                  <div class="col-md-3">
-                      <label for="subclass-input">Saving Throws</label>
-                      <input type="text" class="form-control" id="saving-throws-input">
-                    </div>
-                </div>
-
                 <div class="row">
                   <div class="col-md-3">
                     <label for="level-input">Level</label>
@@ -164,7 +158,19 @@
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-3">
+            <div class="card" id="saving-throws-card">
+              <div class="card-body">
+                <h5 class="card-title">Saving Throws</h5>
+                <button type="button" id="add-saving-throw-button" class="btn btn-dark">Add saving throw</button>
+                <div id="saving-throws-input">
+                <!--Saving throws generate here-->
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="col-md-3">
           <div class="card" id="personality-card">
             <div class="card-body">
               <label for="personality-input">Personality Traits</label>

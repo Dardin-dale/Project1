@@ -26,6 +26,14 @@ function createDropdown(pageElement, response){
     }
 }
 
+//generates subclass based on class
+function createSubclass(pageElement, response){
+    response.subclasses.forEach(function(result){
+        var subclassValue = $("#subclass-input").val(result.name);
+        pageElement.append(subclassValue);
+    });
+}
+
 //generates skills based on class
 function createSkills(pageElement, response){
     pageElement.empty();
@@ -48,14 +56,26 @@ function createProficiencies(pageElement, response){
     });
 }
 
+//generates saving throws based on class
+function createSavingThrows(pageElement, response){
+    pageElement.empty();
+    response.saving_throws.forEach(function(result){
+        var savingThrowsDiv = $("<div>");
+        var savingThrowsInputType = $("<input type=\"text\" class=\"form-control\">").val(result.name);
+        var newSavingThrow = savingThrowsDiv.append(savingThrowsInputType);
+        pageElement.append(newSavingThrow);
+    });
+}
+
 
 //EVENTS
 //Populate fields related to class when class is chosen
 $("#class-input").on('change', function() {
     var classChoice = $(this).val();
     callDD("classes/" + classChoice, $("#skills-input"), createSkills);
-    callDD("classes/" + classChoice, $("#proficiencies-input"), createProficiencies)
-//    callDD("classes/" + classChoice, $("#saving-throw-input"), createSavingThrows) 
+    callDD("classes/" + classChoice, $("#proficiencies-input"), createProficiencies);
+    callDD("classes/" + classChoice, $("#saving-throws-input"), createSavingThrows); 
+    callDD("classes/" + classChoice, $("subclass-input"), createSubclass);
 });
 
 fillField();
