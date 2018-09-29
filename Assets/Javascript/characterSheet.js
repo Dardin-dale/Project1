@@ -1,5 +1,4 @@
 //FUNCTIONS
-console.log('sanity')
 // Retrieve JSON content from the D&D API
 function callDD(charDataField, pageElement, formFunction) {
     var queryURL = "http://www.dnd5eapi.co/api/" + charDataField;
@@ -17,9 +16,11 @@ function fillField(){
     callDD("races", $("#race-input"), createDropdown);
 }
 
-//Fills dropdown fields
+//Fills dropdown fields (removes monk class because it behaves differently than the other classes)
 function createDropdown(pageElement, response){
-    for(result of response.results){
+    var classArray = response.results;
+    var noMonk = classArray.filter( el => el.name !== "Monk" ); 
+    for(result of noMonk){
         var newClass = $("<option>").val(result.name);
         newClass.text(result.name);
         pageElement.append(newClass);
@@ -67,6 +68,15 @@ function createSavingThrows(pageElement, response){
     });
 }
 
+//generates alignment based on race
+function createAlignment(result, pageElement){
+    pageElement.empty();
+    for (result of response.results){
+        pageElement.append(result.alignment.val());
+        $("<option>").text(result.name).val(result.url)
+    }
+}
+
 
 //EVENTS
 //Populate fields related to class when class is chosen
@@ -78,9 +88,11 @@ $("#class-input").on('change', function() {
     callDD("classes/" + classChoice, $("subclass-input"), createSubclass);
 });
 
+// $("#race-input").on('change', function() {
+//     var raceChoice = $(this).val();
+//     createRaceSubcategories(raceChoice);
+// });
 fillField();
-
-
 
 
 
