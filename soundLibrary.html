@@ -18,11 +18,11 @@
   <!-- This is the script link to SoundCloud streaming service -- Using YouTube now -->
   <!-- <script src="https://connect.soundcloud.com/sdk/sdk-3.3.0.js"></script> -->
   <!-- This is the link to the external js file in Assets folder soundjs.js -->
-  <script src="Assets/soundjs.js"></script>
+  <script src="Assets/Javascript/soundjs.js"></script>
 </head>
 
 <body>
-
+  <div id="player"></div>
   <!-- Fluid Jumbotron -->
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -132,22 +132,8 @@
   </div>
 
 
-  <!-- Optional JavaScript -->
-  <!-- JS for streaming from SoundCLoud -->
-  <script>
-    SC.initialize({
-      client_id: 'YOUR_CLIENT_ID'
-    });
 
-    // stream track id 293
-    SC.stream('/tracks/293').then(function (player) {
-      player.play().then(function () {
-        console.log('Playback started!');
-      }).catch(function (e) {
-        console.error('Playback rejected. Try calling play() from a user interaction.', e);
-      });
-    });
-  </script>
+
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
