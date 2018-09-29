@@ -20,13 +20,15 @@ function createDropdown(pageElement, response){
     }
 }
 
-//TODO: make these radio buttons instead of <p>
-function createP(pageElement, response){
+//
+function createSkills(pageElement, response){
     pageElement.empty();
-    console.log(response);
     for(result of response.proficiency_choices[0].from){
-        var newSkill = $("<p>").val(result.name);
-        newSkill.text(result.name);
+        var skillDiv = $("<div>").attr("class", "input-group input-group-prepend input-group-text");
+        var skillRadio = $("<input>").attr("type", "radio");
+        var resultName = result.name.replace("Skill:", "").trim();
+        var skillText = $("<input type=\"text\" class=\"form-control\">").val(resultName);
+        var newSkill = skillDiv.append(skillRadio, skillText);
         pageElement.append(newSkill);
     }
 }
@@ -41,7 +43,7 @@ function fillField(){
 //Populate fields related to class when class is chosen
 $("#class-input").on('change', function() {
     var classChoice = $(this).val();
-    callDD("classes/" + classChoice, $("#skills"), createP);
+    callDD("classes/" + classChoice, $("#skills-input"), createSkills);
 });
 
 fillField();
