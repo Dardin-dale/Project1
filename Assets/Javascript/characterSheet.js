@@ -1,4 +1,5 @@
 //FUNCTIONS
+console.log('sanity')
 // Retrieve JSON content from the D&D API
 function callDD(charDataField, pageElement, formFunction) {
     var queryURL = "http://www.dnd5eapi.co/api/" + charDataField;
@@ -30,7 +31,7 @@ function createSkills(pageElement, response){
     pageElement.empty();
     for(result of response.proficiency_choices[0].from){
         var skillDiv = $("<div>").attr("class", "input-group input-group-prepend input-group-text");
-        var skillRadio = $("<input>").attr("type", "radio");
+        var skillRadio = $("<input>").attr("type", "checkbox");
         var resultName = result.name.replace("Skill:", "").trim();
         var skillText = $("<input type=\"text\" class=\"form-control\">").val(resultName);
         var newSkill = skillDiv.append(skillRadio, skillText);
@@ -83,16 +84,37 @@ var level = 0;
 
 $("#submit-char-sheet").on("click", function(event) {
     event.preventDefault();
-
+    // console.log('works');
+    type = $('#player-type-input').val();
+    // console.log({type});
     charName = $("#char-name-input").val().trim();
+    
     playName = $("#player-name-input").val().trim();
     level = $("#level-input").val().trim();
 
-    // Code for the push
-    dataRef.ref().child("Characters").push({
-
-    charName: charName,
-    playName: playName,
-    level: level
-    });
+    if(charName == '') {
+        alert('Please add a character name');
+    } else if (type == 'Player Character') {
+        // Code for the push
+        dataRef.ref().child("Characters").child(charName).set({
+            charName: charName,
+            playName: playName,
+            level: level
+        }); 
+    } else if (type == 'Non-Player Character') {
+        // Code for the push
+        dataRef.ref().child("NPC").child(charName).set({
+            charName: charName,
+            playName: playName,
+            level: level
+        }); 
+    } else if (type == 'Enemy') {
+        // Code for the push
+        dataRef.ref().child("Enemies").child(charName).set({
+            charName: charName,
+            playName: playName,
+            level: level
+        }); 
+    }
+    
 });
