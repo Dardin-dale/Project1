@@ -48,6 +48,15 @@ function createSkills(pageElement, response){
     }
 }
 
+//add skill generic function
+function addSkill(ele, name) {
+    var skillDiv = $("<div>").attr("class", "input-group input-group-prepend input-group-text");
+    var skillRadio = $("<input>").attr("type", "checkbox");
+    var skillText = $("<input type=\"text\" class=\"form-control\">").val(name);
+    var newSkill = skillDiv.append(skillRadio, skillText);
+    ele.append(newSkill);
+}
+
 //generates proficiencies based on class
 function createProficiencies(pageElement, response){
     pageElement.empty();
@@ -94,6 +103,12 @@ $("#class-input").on('change', function() {
 // });
 fillField();
 
+
+
+
+//#####################################
+//ADD CHAR TO DB
+//#####################################
 
 
 // Initialize Firebase
@@ -150,3 +165,39 @@ $("#submit-char-sheet").on("click", function(event) {
     }
     
 });
+
+//######################################
+// Buttons
+//######################################
+
+//Asks for custom skill/opens skills modal
+$('#add-skill-button').on('click', function(){
+    $('#newSkill').modal('toggle');
+})
+
+$('#save-skill').on('click', function(event) {
+    event.preventDefault();
+    if($('#new-skill-input').val() != '') {
+      addSkill($('#skills-input'), $('#new-skill-input').val());
+      $('#newSkill').modal('toggle');
+      $('#new-skill-input').val(''); 
+    }  
+})
+
+//Adds Saving Throw Modifier indication
+$('#add-saving-throw-button').on('click', function() {
+    $('#newSave').modal('toggle');
+})
+
+$('#save-save').on('click', function(event) {
+    event.preventDefault();
+    var save = $('#new-save-input').val();
+    if(save != '') {
+      var savingThrowsDiv = $("<div>");
+      var savingThrowsInputType = $("<input type=\"text\" class=\"form-control\">").val(save);
+      var newSavingThrow = savingThrowsDiv.append(savingThrowsInputType);
+      $('#saving-throws-input').append(newSavingThrow);
+      $('#newSave').modal('toggle');
+      $('#new-save-input').val(''); 
+    }  
+})
