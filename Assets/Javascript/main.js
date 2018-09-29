@@ -12,15 +12,17 @@ $(document).on('ready', function () {
   firebase.initializeApp(config);
 
   var dataRef = firebase.database();
-
+  var playref = dataref.child('players');
+  var enemyref = dataref.child('enemies');
+  var npcref = dataref.child('NPC')
   //TODO: This doesn't work!
-  dataRef.ref().on("child_added", function(childSnapshot) {
-    console.log(childSnapshot.val());
-    console.log("Working?" + dataRef.charName);
+  playref.ref().on("child_added", function(snap) {
+    console.log(snap.val());
+    console.log("Working?" + snap.val().charName);
 
-    var characterName = childSnapshot.val().charName;
-    var playerName = childSnapshot.val().playName;
-    var characterLevel = childSnapshot.val().level;
+    var characterName = snap.val().charName;
+    var playerName = snap.val().playName;
+    var characterLevel = snap.val().level;
 
     console.log(characterName);
     console.log(playerName);
