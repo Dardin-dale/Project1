@@ -29,10 +29,8 @@ function createDropdown(pageElement, response){
 //generates subclass based on class
 function createSubclass(pageElement, response){
     response.subclasses.forEach(function(result){
-        var subclassDiv = $("<div>");
-        var subclassInputType = $("<input type=\"text\" class=\"form-control\">").val(result.name);
-        var newSubclass = subclassDiv.append(subclassInputType);
-        pageElement.append(newSubclass);
+        var subclassValue = $("#subclass-input").val(result.name);
+        pageElement.append(subclassValue);
     });
 }
 
