@@ -11,6 +11,11 @@ function callDD(charDataField, pageElement, formFunction) {
     });
 }
 
+function fillField(){
+    callDD("classes", $("#class-input"), createDropdown);
+    callDD("races", $("#race-input"), createDropdown);
+}
+
 //Fills dropdown fields
 function createDropdown(pageElement, response){
     for(result of response.results){
@@ -20,7 +25,7 @@ function createDropdown(pageElement, response){
     }
 }
 
-//
+//generates skills based on class
 function createSkills(pageElement, response){
     pageElement.empty();
     for(result of response.proficiency_choices[0].from){
@@ -33,9 +38,13 @@ function createSkills(pageElement, response){
     }
 }
 
-function fillField(){
-    callDD("classes", $("#class-input"), createDropdown);
-    callDD("races", $("#race-input"), createDropdown);
+//generates proficiencies based on class
+function createProficiencies(pageElement, response){
+    pageElement.empty();
+    response.proficiencies.forEach(function(result){
+        var newProficiency = result.name  + ", ";
+        pageElement.append(newProficiency);
+    });
 }
 
 
@@ -44,6 +53,8 @@ function fillField(){
 $("#class-input").on('change', function() {
     var classChoice = $(this).val();
     callDD("classes/" + classChoice, $("#skills-input"), createSkills);
+    callDD("classes/" + classChoice, $("#proficiencies-input"), createProficiencies)
+//    callDD("classes/" + classChoice, $("#saving-throw-input"), createSavingThrows) 
 });
 
 fillField();
