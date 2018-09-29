@@ -1,26 +1,65 @@
-// Function for retrieving JSON content from the D&D API
-function callDD(charDataField, pageElement) {
+//FUNCTIONS
+// Retrieve JSON content from the D&D API
+function callDD(charDataField, pageElement, formFunction) {
     var queryURL = "http://www.dnd5eapi.co/api/" + charDataField;
-        
+
     $.ajax({
-        url: queryURL,
+        url: queryURL.toLowerCase(),
         method: "GET"
     }).then(function(response){
-        for(result of response.results){
+        formFunction(pageElement, response);
+    });
+}
+
+function fillField(){
+    callDD("classes", $("#class-input"), createDropdown);
+    callDD("races", $("#race-input"), createDropdown);
+}
+
+//Fills dropdown fields
+function createDropdown(pageElement, response){
+    for(result of response.results){
         var newClass = $("<option>").val(result.name);
         newClass.text(result.name);
         pageElement.append(newClass);
-        }
     }
-    );
 }
 
-function fillClass(){
-    callDD("classes", $("#class-input"));
-    callDD("races", $("#race-input"));
+//generates skills based on class
+function createSkills(pageElement, response){
+    pageElement.empty();
+    for(result of response.proficiency_choices[0].from){
+        var skillDiv = $("<div>").attr("class", "input-group input-group-prepend input-group-text");
+        var skillRadio = $("<input>").attr("type", "radio");
+        var resultName = result.name.replace("Skill:", "").trim();
+        var skillText = $("<input type=\"text\" class=\"form-control\">").val(resultName);
+        var newSkill = skillDiv.append(skillRadio, skillText);
+        pageElement.append(newSkill);
+    }
 }
 
-fillClass();
+//generates proficiencies based on class
+function createProficiencies(pageElement, response){
+    pageElement.empty();
+    response.proficiencies.forEach(function(result){
+        var newProficiency = result.name  + ", ";
+        pageElement.append(newProficiency);
+    });
+}
+
+
+//EVENTS
+//Populate fields related to class when class is chosen
+$("#class-input").on('change', function() {
+    var classChoice = $(this).val();
+    callDD("classes/" + classChoice, $("#skills-input"), createSkills);
+    callDD("classes/" + classChoice, $("#proficiencies-input"), createProficiencies)
+//    callDD("classes/" + classChoice, $("#saving-throw-input"), createSavingThrows) 
+});
+
+fillField();
+
+
 
 
 
