@@ -22,11 +22,11 @@
                   <div class="col-md-3">
                     <label for="class-input">Player Type</label>
                       <div class="input-group mb-3">
-                        <select class="custom-select" id="playerType-input">
+                        <select class="custom-select" id="player-type-input">
                           <option selected></option>
-                          <option value="1">Player Character</option>
-                          <option value="1">Non-Player Character</option>
-                          <option value="1">Enemy</option>
+                          <option value="Player Character">Player Character</option>
+                          <option value="Non-Player Character">Non-Player Character</option>
+                          <option value="Enemy">Enemy</option>
                         </select>
                       </div>
                   </div>
@@ -55,19 +55,13 @@
                 <div class="row">
                   <div class="col-md-3">
                     <label for="subclass-input">Subclass</label>
-                    <input type="text" class="form-control" id="player-name-input">
+                    <input type="text" class="form-control" id="subclass-input">
                   </div>
 
                   <div class="col-md-3">
-                    <label for="subclass-input">Proficiencies</label>
-                    <input type="text" class="form-control" id="player-name-input">
+                    <label for="subclass-input">I don't know</label>
+                    <input type="text" class="form-control" id="-input">
                   </div>
-
-                  <div class="col-md-3">
-                      <label for="subclass-input">Saving Throws</label>
-                      <input type="text" class="form-control" id="player-name-input">
-                    </div>
-                </div>
 
                 <div class="row">
                   <div class="col-md-3">
@@ -119,32 +113,32 @@
               <button type="button" id="preset-button" class="btn btn-dark">Use Preset</button>
               <button type="button" id="roll-button" class="btn btn-dark">Roll</button>
               <div>
-                <label for="char-name-input">Strength</label>
+                <label for="strength-input">Strength</label>
                 <input type="text" class="form-control" id="strength-input">
               </div>
 
               <div>
-                <label for="char-name-input">Dexterity</label>
+                <label for="dexterity-input">Dexterity</label>
                 <input type="text" class="form-control" id="dexterity-input">
               </div>
 
               <div>
-                <label for="char-name-input">Constitution</label>
+                <label for="constitution-input">Constitution</label>
                 <input type="text" class="form-control" id="constitution-input">
               </div>
 
               <div>
-                <label for="char-name-input">Intelligence</label>
+                <label for="intelligence-input">Intelligence</label>
                 <input type="text" class="form-control" id="intelligence-input">
               </div>
 
               <div>
-                <label for="char-name-input">Wisdom</label>
+                <label for="wisdom-input">Wisdom</label>
                 <input type="text" class="form-control" id="wisdom-input">
               </div>
 
               <div>
-                <label for="char-name-input">Charisma</label>
+                <label for="charisma-input">Charisma</label>
                 <input type="text" class="form-control" id="charisma-input">
               </div>
               </div>
@@ -157,23 +151,38 @@
             <div class="card-body">
               <h5 class="card-title">Skills</h5>
               <button type="button" id="add-skill-button" class="btn btn-dark">Add skill</button>
+              <div id="skills-input">
+              <!--New skills generate here-->
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-3">
+            <div class="card" id="saving-throws-card">
+              <div class="card-body">
+                <h5 class="card-title">Saving Throws</h5>
+                <button type="button" id="add-saving-throw-button" class="btn btn-dark">Add saving throw</button>
+                <div id="saving-throws-input">
+                <!--Saving throws generate here-->
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="col-md-3">
           <div class="card" id="personality-card">
             <div class="card-body">
               <label for="personality-input">Personality Traits</label>
               <textarea class="form-control" rows="3" id="personality-input"></textarea>
 
-              <label for="personality-input">Ideals</label>
+              <label for="ideals-input">Ideals</label>
               <textarea class="form-control" rows="3" id="ideals-input"></textarea>
 
-              <label for="personality-input">Bonds</label>
+              <label for="bonds-input">Bonds</label>
               <textarea class="form-control" rows="3" id="bonds-input"></textarea>
 
-              <label for="personality-input">Flaws</label>
+              <label for="flaws-input">Flaws</label>
               <textarea class="form-control" rows="3" id="flaws-input"></textarea>
             </div>
           </div>
@@ -182,19 +191,10 @@
 
     <div class="row">
         <div class="col-md-6">
-          <div class="card" id="personality-card">
+          <div class="card" id="proficiencies-card">
             <div class="card-body">
-              <label for="personality-input">Proficiencies</label>
-              <textarea class="form-control" rows="3" id="personality-input"></textarea>
-
-              <label for="personality-input">Ideals</label>
-              <textarea class="form-control" rows="3" id="ideals-input"></textarea>
-
-              <label for="personality-input">Bonds</label>
-              <textarea class="form-control" rows="3" id="bonds-input"></textarea>
-
-              <label for="personality-input">Flaws</label>
-              <textarea class="form-control" rows="3" id="flaws-input"></textarea>
+              <label for="proficiencies-input">Proficiencies</label>
+              <textarea class="form-control" rows="3" id="proficiencies-input"></textarea><!--proficiencies generate between textarea tags-->
             </div>
           </div>
         </div>
@@ -202,7 +202,54 @@
 
   </div>
 
-    <button type="button" id="submit-char-sheet" class="btn btn-dark">Submit to Dungeon Master</button>
+    <button type="submit" id="submit-char-sheet" class="btn btn-dark">Submit</button>
+
+
+<!-- Skills Modal -->
+<div class="modal fade" id="newSkill" tabindex="-1" role="dialog" aria-labelledby="newSkill" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Skill</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+          <input type="text" class="form-control" aria-label="skill name" id="new-skill-input">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="save-skill">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Saves Modal -->
+<div class="modal fade" id="newSave" tabindex="-1" role="dialog" aria-labelledby="newSave" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Save</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+          <input type="text" class="form-control" aria-label="skill name" id="new-save-input">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="save-save">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
