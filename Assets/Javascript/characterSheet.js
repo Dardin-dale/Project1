@@ -24,6 +24,7 @@ function createClassDropdown(pageElement, response){
         pageElement.append($("<option>").val(result.name).text(result.name));
     }
 
+    //Updates character class dependant UI elements
     $("#class-input").on('change', function() {
         var classChoice = $(this).val();
 
@@ -37,19 +38,7 @@ function createClassDropdown(pageElement, response){
                 createSubclass(response);
             }
         );
-        
-        //callDD("classes/" + classChoice, $("#skills-input"), createSkills);
-        // callDD("classes/" + classChoice, $("#proficiencies-input"), createProficiencies);
-        // callDD("classes/" + classChoice, $("#saving-throws-input"), createSavingThrows); 
-        // callDD("classes/" + classChoice, $("#subclass-input"), createSubclass);
     });
-}
-
-//Fills race dropdown from API
-function createRaceDropdown(pageElement, response){
-    for(var result of response.results){
-        pageElement.append($("<option>").val(result.url).text(result.name));
-    }
 }
 
 //generates subclass based on class
@@ -100,6 +89,13 @@ function createSavingThrows(response){
         var newSavingThrow = savingThrowsDiv.append(savingThrowsInputType);
         $("#saving-throws-input").append(newSavingThrow);
     });
+}
+
+//Fills race dropdown from API
+function createRaceDropdown(pageElement, response){
+    for(var result of response.results){
+        pageElement.append($("<option>").val(result.url).text(result.name));
+    }
 }
 
 //generates traits based on race
