@@ -12,12 +12,12 @@ function callDD(charDataField, pageElement, formFunction) {
 }
 
 function fillField(){
-    callDD("classes", $("#class-input"), createDropdown);
-    callDD("races", $("#race-input"), createDropdown);
+    callDD("classes", $("#class-input"), createClassDropdown);
+    callDD("races", $("#race-input"), createRaceDropdown);
 }
 
-//Fills dropdown fields (removes monk class because it behaves differently than the other classes)
-function createDropdown(pageElement, response){
+//Fills class dropdown from API(removes monk class because it behaves differently than the other classes)
+function createClassDropdown(pageElement, response){
     var classArray = response.results;
     var noMonk = classArray.filter( el => el.name !== "Monk" ); 
     for(result of noMonk){
@@ -26,6 +26,15 @@ function createDropdown(pageElement, response){
         pageElement.append(newClass);
     }
 }
+
+//Fills race dropdown from API
+function createRaceDropdown(pageElement, response){
+    for(result of response.results){
+        var newRace = $("<option>").val(result.url).text(result.name);
+        pageElement.append(newRace);
+    }
+}
+
 
 //generates subclass based on class
 function createSubclass(pageElement, response){
@@ -78,14 +87,17 @@ function createSavingThrows(pageElement, response){
 }
 
 //generates alignment based on race
-function createAlignment(result, pageElement){
-    pageElement.empty();
-    for (result of response.results){
-        pageElement.append(result.alignment.val());
-        $("<option>").text(result.name).val(result.url)
-    }
+function createAlignment(pageElement, response){
+    pageElement.text(response.alignment);
 }
 
+//generates traits based on race
+function createTraits(pageElement, response){
+    pageElement.empty();
+    response.traits.forEach(function(result){
+        pageElement.append(result.name + ", ");
+    });
+}
 
 //EVENTS
 //Populate fields related to class when class is chosen
@@ -97,10 +109,18 @@ $("#class-input").on('change', function() {
     callDD("classes/" + classChoice, $("subclass-input"), createSubclass);
 });
 
-// $("#race-input").on('change', function() {
-//     var raceChoice = $(this).val();
-//     createRaceSubcategories(raceChoice);
-// });
+$("#race-input").on('change', function() {
+    var raceURL = $(this).val();
+
+    $.ajax({
+        url: raceURL.toLowerCase(),
+        method: "GET"
+    }).then(function(response){
+        createAlignment($("#alignment-input"), response);
+        createTraits($("#traits-input"), response);
+    });
+});
+
 fillField();
 
 
