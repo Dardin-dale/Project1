@@ -241,7 +241,8 @@ $('#roll-button').on('click', function() {
       rolls.push(sum);
     }
     
-    var newP = $('p').text('Rolled Values: '+ rolls);
+    $('#rollys').empty();
+    var newP = $('<p>').text('Rolled Values: '+ rolls);
     $('#rollys').append(newP);
     
 })
