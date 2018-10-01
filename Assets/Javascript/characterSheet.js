@@ -7,42 +7,58 @@ function callDD(charDataField, pageElement, formFunction) {
         url: queryURL.toLowerCase(),
         method: "GET"
     }).then(function(response){
-        formFunction(pageElement, response);
+         formFunction(pageElement, response);
     });
 }
 
-function fillField(){
-    callDD("classes", $("#class-input"), createDropdown);
-    callDD("races", $("#race-input"), createDropdown);
+function fillFields(){
+    callDD("classes", $("#class-input"), createClassDropdown);
+    callDD("races", $("#race-input"), createRaceDropdown);
 }
 
-//Fills dropdown fields
-function createDropdown(pageElement, response){
-    for(result of response.results){
-        var newClass = $("<option>").val(result.name);
-        newClass.text(result.name);
-        pageElement.append(newClass);
+//Fills class dropdown from API(removes monk class because it behaves differently than the other classes)
+function createClassDropdown(pageElement, response){
+    var classArray = response.results;
+    var noMonk = classArray.filter(function(el) { return el.name !== "Monk"; }); 
+    for(var result of noMonk){
+        pageElement.append($("<option>").val(result.name).text(result.name));
     }
+
+    //Updates character class dependant UI elements
+    $("#class-input").on('change', function() {
+        var classChoice = $(this).val();
+
+        callDD(
+            "classes/" + encodeURIComponent(classChoice),
+            null,
+            function(pageElement, response) {
+                createSkills(response);
+                createProficiencies(response);
+                createSavingThrows(response);
+                createSubclass(response);
+            }
+        );
+    });
 }
 
 //generates subclass based on class
-function createSubclass(pageElement, response){
+function createSubclass(response){
     response.subclasses.forEach(function(result){
         var subclassValue = $("#subclass-input").val(result.name);
-        pageElement.append(subclassValue);
+        $("#subclass-input").append(subclassValue);
     });
 }
 
 //generates skills based on class
-function createSkills(pageElement, response){
-    pageElement.empty();
+function createSkills(response){
+    $("#skills-input").empty();
     for(result of response.proficiency_choices[0].from){
-        var skillDiv = $("<div>").attr("class", "input-group input-group-prepend input-group-text");
-        var skillRadio = $("<input>").attr("type", "checkbox");
+        var skillDiv = $("<div class=\"input-group input-group-prepend input-group-text\">");
+        var skillRadio = $("<input type=\"checkbox\">");
         var resultName = result.name.replace("Skill:", "").trim();
         var skillText = $("<input type=\"text\" class=\"form-control\">").val(resultName);
         var newSkill = skillDiv.append(skillRadio, skillText);
-        pageElement.append(newSkill);
+        $("#skills-input").append(newSkill);
     }
 }
 
@@ -56,41 +72,62 @@ function addSkill(ele, name) {
 }
 
 //generates proficiencies based on class
-function createProficiencies(pageElement, response){
-    pageElement.empty();
+function createProficiencies(response){
+    var newProficiency = "";
     response.proficiencies.forEach(function(result){
-        var newProficiency = result.name  + ", ";
-        pageElement.append(newProficiency);
+        newProficiency += result.name  + ", ";
     });
+    $("#proficiencies-input").text(newProficiency.slice(0,-2));
 }
 
 //generates saving throws based on class
-function createSavingThrows(pageElement, response){
-    pageElement.empty();
+function createSavingThrows(response){
+    $("#saving-throws-input").empty();
     response.saving_throws.forEach(function(result){
         var savingThrowsDiv = $("<div>");
         var savingThrowsInputType = $("<input type=\"text\" class=\"form-control\">").val(result.name);
         var newSavingThrow = savingThrowsDiv.append(savingThrowsInputType);
-        pageElement.append(newSavingThrow);
+        $("#saving-throws-input").append(newSavingThrow);
     });
 }
 
+//Fills race dropdown from API
+function createRaceDropdown(pageElement, response){
+    for(var result of response.results){
+        pageElement.append($("<option>").val(result.url).text(result.name));
+    }
+}
+
+//generates traits based on race
+function createTraits(pageElement, response){
+    var newTrait ="";
+    response.traits.forEach(function(result){
+        newTrait += result.name + ", ";
+    });
+    pageElement.text(newTrait.slice(0,-2));
+}
 
 //EVENTS
-//Populate fields related to class when class is chosen
-$("#class-input").on('change', function() {
-    var classChoice = $(this).val();
-    callDD("classes/" + classChoice, $("#skills-input"), createSkills);
-    callDD("classes/" + classChoice, $("#proficiencies-input"), createProficiencies);
-    callDD("classes/" + classChoice, $("#saving-throws-input"), createSavingThrows); 
-    callDD("classes/" + classChoice, $("subclass-input"), createSubclass);
+$("#race-input").on("change", function() {
+    var raceURL = $(this).val();
+
+    $.ajax({
+        url: raceURL,
+        method: "GET"
+    }).then(function(response){
+        $("#alignment-input").text(response.alignment);
+        createTraits($("#traits-input"), response);
+    });
 });
 
-fillField();
+fillFields();
+
+
 
 //#####################################
 //ADD CHAR TO DB
 //#####################################
+
 
 // Initialize Firebase
 var config = {
@@ -109,6 +146,7 @@ var dataRef = firebase.database();
 var charName = "";
 var playName = "";
 var level = 0;
+var type = "";
 
 $("#submit-char-sheet").on("click", function(event) {
     event.preventDefault();
