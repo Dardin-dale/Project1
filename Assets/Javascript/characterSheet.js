@@ -53,20 +53,15 @@ function createSubclass(response){
 function createSkills(response){
     $("#skills-input").empty();
     for(result of response.proficiency_choices[0].from){
-        var skillDiv = $("<div class=\"input-group input-group-prepend input-group-text\">");
-        var skillRadio = $("<input type=\"checkbox\">");
-        var resultName = result.name.replace("Skill:", "").trim();
-        var skillText = $("<input type=\"text\" class=\"form-control\">").val(resultName);
-        var newSkill = skillDiv.append(skillRadio, skillText);
-        $("#skills-input").append(newSkill);
+        addSkill($("#skills-input"), result.name.replace("Skill:", "").trim());
     }
 }
 
 //add skill generic function
 function addSkill(ele, name) {
     var skillDiv = $("<div>").attr("class", "input-group input-group-prepend input-group-text");
-    var skillRadio = $("<input>").attr("type", "checkbox");
-    var skillText = $("<input type=\"text\" class=\"form-control\">").val(name);
+    var skillRadio = $("<input>").attr("type", "checkbox").val(name);
+    var skillText = $("<span>").text(name);
     var newSkill = skillDiv.append(skillRadio, skillText);
     ele.append(newSkill);
 }
@@ -84,17 +79,19 @@ function createProficiencies(response){
 function createSavingThrows(response){
     $("#saving-throws-input").empty();
     response.saving_throws.forEach(function(result){
-        var savingThrowsDiv = $("<div>");
-        var savingThrowsInputType = $("<input type=\"text\" class=\"form-control\">").val(result.name);
-        var newSavingThrow = savingThrowsDiv.append(savingThrowsInputType);
-        $("#saving-throws-input").append(newSavingThrow);
+        fillSavingThrows(result.name);
     });
+}
+
+function fillSavingThrows(name){
+    var savingThrowsDiv = $("<div class=\"saving-throws-class\">").val(name).text(name);
+    $("#saving-throws-input").append(savingThrowsDiv);
 }
 
 //Fills race dropdown from API
 function createRaceDropdown(pageElement, response){
     for(var result of response.results){
-        pageElement.append($("<option>").val(result.url).text(result.name));
+        pageElement.append($("<option>").val(result.url).data("name", result.name).text(result.name));
     }
 }
 
@@ -143,43 +140,150 @@ firebase.initializeApp(config);
 var dataRef = firebase.database();
 
 // Initial Values
+var type = "";
 var charName = "";
 var playName = "";
+var charClass = "";
 var level = 0;
-var type = "";
+var race = "";
+var subclass = "";
+var ep = 0;
+var background = "";
+var alignment = "";
+var strength = "";
+var dexterity = "";
+var constitution = "";
+var intelligence = "";
+var wisdom = "";
+var charisma = "";
+var skills = [];
+var savingThrows = [];
+var traits = "";
+var proficiencies = "";
+var ideals = "";
+var bonds = "";
+var flaws = "";
+
 
 $("#submit-char-sheet").on("click", function(event) {
     event.preventDefault();
-    // console.log('works');
     type = $('#player-type-input').val();
-    // console.log({type});
     charName = $("#char-name-input").val().trim();
-    
     playName = $("#player-name-input").val().trim();
+    charClass = $("#class-input").val().trim();
     level = $("#level-input").val().trim();
+    race = $('#race-input :selected').data("name");
+    subclass = $("#subclass-input").val().trim(); 
+    ep = $("#ep-input").val().trim();
+    background = $("#background-input").val().trim(); 
+    alignment = $("#alignment-input").val().trim(); 
+    strength = $("#strength-input").val().trim(); 
+    dexterity = $("#dexterity-input").val().trim(); 
+    constitution = $("#constitution-input").val().trim(); 
+    intelligence = $("#intelligence-input").val().trim(); 
+    wisdom = $("#wisdom-input").val().trim(); 
+    charisma = $("#charisma-input").val().trim(); 
+    
+    skills = [];
+    $('#skills-input :checkbox').each(function(){
+        var skillsValue = $(this).val();
+        if($(this).is(':checked')){
+            skills.push(skillsValue);
+            }
+    });
 
-    if(charName == '') {
-        alert('Please add a character name');
+    savingThrows = [];
+    $('.saving-throws-class').each(function(){
+        var savingThrowsVal = $(this).val();
+            savingThrows.push(savingThrowsVal);
+    });
+
+    traits = $("#traits-input").val().trim(); 
+    proficiencies = $("#proficiencies-input").val().trim(); 
+    ideals = $("#ideals-input").val().trim(); 
+    bonds = $("#bonds-input").val().trim(); 
+    flaws = $("#flaws-input").val().trim(); 
+
+
+    if(charName.trim() === '' || $("#race-input")[0].selectedIndex <= 0 || $("#player-type-input")[0].selectedIndex <= 0){
+        alert('Player Type, Character Name, and Race are required fields.');
     } else if (type == 'Player Character') {
         // Code for the push
         dataRef.ref().child("Characters").child(charName).set({
             charName: charName,
             playName: playName,
-            level: level
+            charClass: charClass,
+            level: level,
+            race: race,
+            subclass: subclass,
+            ep: ep,
+            background: background,
+            alignment: alignment,
+            strength: strength,
+            dexterity: dexterity,
+            constitution: constitution,
+            intelligence: intelligence,
+            wisdom: wisdom,
+            charisma: charisma,
+            skills: skills,
+            savingThrows: savingThrows,
+            traits: traits,
+            proficiencies: proficiencies,
+            ideals: ideals,
+            bonds: bonds,
+            flaws: flaws
         }); 
     } else if (type == 'Non-Player Character') {
         // Code for the push
         dataRef.ref().child("NPC").child(charName).set({
             charName: charName,
             playName: playName,
-            level: level
+            charClass: charClass,
+            level: level,
+            race: race,
+            subclass: subclass,
+            ep: ep,
+            background: background,
+            alignment: alignment,
+            strength: strength,
+            dexterity: dexterity,
+            constitution: constitution,
+            intelligence: intelligence,
+            wisdom: wisdom,
+            charisma: charisma,
+            skills: skills,
+            savingThrows: savingThrows,
+            traits: traits,
+            proficiencies: proficiencies,
+            ideals: ideals,
+            bonds: bonds,
+            flaws: flaws
         }); 
     } else if (type == 'Enemy') {
         // Code for the push
         dataRef.ref().child("Enemies").child(charName).set({
             charName: charName,
             playName: playName,
-            level: level
+            charClass: charClass,
+            level: level,
+            race: race,
+            subclass: subclass,
+            ep: ep,
+            background: background,
+            alignment: alignment,
+            strength: strength,
+            dexterity: dexterity,
+            constitution: constitution,
+            intelligence: intelligence,
+            wisdom: wisdom,
+            charisma: charisma,
+            skills: skills,
+            savingThrows: savingThrows,
+            traits: traits,
+            proficiencies: proficiencies,
+            ideals: ideals,
+            bonds: bonds,
+            flaws: flaws
         }); 
     }
     
@@ -212,11 +316,7 @@ $('#save-save').on('click', function(event) {
     event.preventDefault();
     var save = $('#new-save-input').val();
     if(save != '') {
-      var savingThrowsDiv = $("<div>");
-      var savingThrowsInputType = $("<input type=\"text\" class=\"form-control\">").val(save);
-      var newSavingThrow = savingThrowsDiv.append(savingThrowsInputType);
-      $('#saving-throws-input').append(newSavingThrow);
-      $('#newSave').modal('toggle');
-      $('#new-save-input').val(''); 
+        $('#newSave').modal('toggle');
+        fillSavingThrows(save);
     }  
-})
+});
