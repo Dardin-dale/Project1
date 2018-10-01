@@ -182,3 +182,29 @@ $('#save-save').on('click', function(event) {
       $('#new-save-input').val(''); 
     }  
 })
+
+//TODO: add class and race mods to Ability scores on submit
+
+//Roll Button function
+$('#roll-button').on('click', function() {
+    //roll 4 6-sided die and record the cumulative total of the highest 3 dice 6 times
+    var rolls = [];
+    for(var i = 0; i <= 5; i++) {
+      var stat = [];
+      for(var j=0; j<=3; j++){
+        stat.push(Math.floor(6*Math.random()) + 1);
+      }
+      var min = Math.min(stat);
+      stat.splice(stat.indexOf(min), 1);
+      var sum = 0;
+      for(var k = 0; k < stat.length; k++ ){
+        sum += stat[k]; 
+      }
+      rolls.push(sum);
+    }
+    
+    // $('#rollys').empty();
+    var newP = $('p').text('Rolled Values: '+ rolls);
+    $('#rollys').append(newP);
+    
+})
