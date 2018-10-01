@@ -34,38 +34,6 @@
                   </div>
                 </div>
 
-                <div class="col-md-3">
-                  <label for="char-name-input">Character Name</label>
-                  <input type="text" class="form-control" id="char-name-input">
-                </div>
-
-                <div class="col-md-3">
-                  <label for="player-name-input">Player Name</label>
-                  <input type="text" class="form-control" id="player-name-input">
-                </div>
-
-                <div class="col-md-3">
-                  <label for="class-input">Class</label>
-                  <div class="input-group mb-3">
-                    <select class="custom-select" id="class-input">
-                      <option selected></option>
-                      <!--classes from API generate here-->
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-3">
-                  <label for="subclass-input">Subclass</label>
-                  <input type="text" class="form-control" id="subclass-input">
-                </div>
-
-                <div class="col-md-3">
-                  <label for="subclass-input">I don't know</label>
-                  <input type="text" class="form-control" id="-input">
-                </div>
-
                 <div class="row">
                   <div class="col-md-3">
                     <label for="level-input">Level</label>
@@ -83,8 +51,8 @@
                   </div>
 
                   <div class="col-md-3">
-                    <label for="alignment-input">Alignment</label>
-                    <input type="text" class="form-control" id="alignment-input">
+                    <label for="subclass-input">Subclass</label>
+                    <input type="text" class="form-control" id="subclass-input">
                   </div>
 
                   <div class="col-md-3">
@@ -99,7 +67,15 @@
                     <textarea class="form-control" rows="3" id="background-input"></textarea>
                   </div>
                 </div>
-            </form>
+
+                 <div class="row">
+                    <div class="col-md-12">
+                      <label for="alignment-input">Alignment</label>
+                      <textarea class="form-control" rows="3" id="alignment-input"></textarea>
+                    </div>
+                  </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -174,11 +150,14 @@
         </div>
       </div>
 
-      <div class="col-md-3">
-        <div class="card" id="personality-card">
-          <div class="card-body">
-            <label for="personality-input">Personality Traits</label>
-            <textarea class="form-control" rows="3" id="personality-input"></textarea>
+        <div class="col-md-3">
+          <div class="card" id="personality-card">
+            <div class="card-body">
+              <label for="traits-input">Personality Traits</label>
+              <textarea class="form-control" rows="3" id="traits-input"></textarea>
+
+              <label for="proficiencies-input">Proficiencies</label>
+              <textarea class="form-control" rows="6" id="proficiencies-input"></textarea>
 
             <label for="ideals-input">Ideals</label>
             <textarea class="form-control" rows="3" id="ideals-input"></textarea>
@@ -193,17 +172,6 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card" id="proficiencies-card">
-          <div class="card-body">
-            <label for="proficiencies-input">Proficiencies</label>
-            <textarea class="form-control" rows="3" id="proficiencies-input"></textarea>
-            <!--proficiencies generate between textarea tags-->
-          </div>
-        </div>
-      </div>
-    </div>
 
   </div>
 
