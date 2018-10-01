@@ -1,5 +1,35 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <title>Character Sheet</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="Assets/CSS/style.css">
+  </head>
+  <body>
+
+    <div class="container">
+      <h2>Character sheet:</h2>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card" id="top-card">
+            <div class="card-body">
+              <form class="form">
+                <div class="row">
+                  <div class="col-md-3">
+                    <label for="class-input">Player Type</label>
+                      <div class="input-group mb-3">
+                        <select class="custom-select" id="player-type-input">
+                          <option selected value="0"></option>
+                          <option value="Player Character">Player Character</option>
+                          <option value="Non-Player Character">Non-Player Character</option>
+                          <option value="Enemy">Enemy</option>
+                        </select>
+                      </div>
+                  </div>
 
 <head>
   <title>Character Sheet</title>
@@ -44,7 +74,7 @@
                     <label for="class-input">Race</label>
                     <div class="input-group mb-3">
                       <select class="custom-select" id="race-input">
-                        <option selected></option>
+                        <option selected value = "0"></option>
                         <!--races from API generate here-->
                       </select>
                     </div>
