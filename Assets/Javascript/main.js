@@ -12,30 +12,58 @@ $(document).on('ready', function () {
   firebase.initializeApp(config);
 
   var dataRef = firebase.database();
-  var playref = dataref.child('players');
+  var playref = dataref.child('Characters');
   var enemyref = dataref.child('enemies');
   var npcref = dataref.child('NPC')
-  //TODO: This doesn't work!
+  //TODO add children
   playref.ref().on("child_added", function(snap) {
-    console.log(snap.val());
     console.log("Working?" + snap.val().charName);
-
-    var characterName = snap.val().charName;
-    var playerName = snap.val().playName;
-    var characterLevel = snap.val().level;
-
-    console.log(characterName);
-    console.log(playerName);
-    console.log(characterLevel);
+    var charName = snap.val().charName;
 
     // Output character info
-    var character = $("#test-character").append(
-      $("<p>").text(characterName),
-      $("<p>").text(playerName),
-      $("<p>").text(characterLevel),
-    );
-
-    // Append to main page - TODO: Not sure this line is necessary
-    $("#test-character").append(character);
+    $("#players").append($("<a>").text(charName));
   });
+
+  //
+  npcref.ref().on("child_added", function(snap) {
+    console.log("Working?" + snap.val().charName);
+    var charName = snap.val().charName;
+
+    // Output character info
+    $("#npc").append($("<a>").text(charName));
+  });
+
+  enemyref.ref().on("child_added", function(snap) {
+    console.log("Working?" + snap.val().charName);
+    var charName = snap.val().charName;
+    var char = $("<a>").text(charName);
+    char.addClass('char-info');
+    // Output character info
+    $("#enemies").append(char);
+  });
+
+  $('.char-info').on('click', )
+
+    // var charName = snap.val().charName;
+    // var playName = snap.val().playName;
+    // var charClass = snap.val().charClass;
+    // var level = snap.val().level;
+    // var race = snap.val().race;
+    // var subclass = snap.val().subclass;
+    // var ep = snap.val().ep;
+    // var background = snap.val().background;
+    // var alignment = snap.val().alignment;
+    // var strength = snap.val().strength;
+    // var dexterity = snap.val().dexterity;
+    // var constitution = snap.val().constitution;
+    // var intelligence = snap.val().intelligence;
+    // var wisdom = snap.val().wisdom;
+    // var charisma = snap.val().charisma;
+    // var skills = snap.val().skills;
+    // var savingThrows = snap.val().savingThrows;
+    // var traits = snap.val().traits;
+    // var proficiencies = snap.val().proficiencies;
+    // var ideals = snap.val().ideals;
+    // var bonds = snap.val().bonds;
+    // var flaws = snap.val().flaws;
 })
