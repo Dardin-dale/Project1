@@ -2,10 +2,12 @@ body{
   background-image: url(../Images/dark-daylight.jpg);
   font-family: 'Aladin', cursive;
   color: white;
+  font-size: 125%;
 }
 
 .jumbotron{
   background: rgba(161, 77, 77, .5);
+  padding: 10px;
 }
 
 a{
@@ -20,6 +22,7 @@ a{
   background-color: rgba(17, 71, 22, 0.8);
   border: gray;
   color: white;
+  font-size: 105%;
 }
 
 hr{
@@ -27,9 +30,13 @@ hr{
 }
 
 .card{
-  background: rgba(161, 77, 77, .5);
+  background: none;
 }
 
 #content-card{
   background: none;
+}
+
+#music-card{
+  background: rgba(161, 77, 77, .5);
 }
