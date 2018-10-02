@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
-  <!-- <head>
+  <head>
     <title>Character Sheet</title>
-    Required meta tags
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -29,45 +29,33 @@
                           <option value="Enemy">Enemy</option>
                         </select>
                       </div>
-                  </div> -->
+                  </div>
 
-<head>
-  <title>Character Sheet</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                  <div class="col-md-3">
+                    <label for="char-name-input">Character Name</label>
+                    <input type="text" class="form-control" id="char-name-input">
+                  </div>
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
-    crossorigin="anonymous">
-  <link rel="stylesheet" href="Assets/CSS/style.css">
-</head>
+                  <div class="col-md-3">
+                    <label for="player-name-input">Player Name</label>
+                    <input type="text" class="form-control" id="player-name-input">
+                  </div>
 
-<body>
-
-  <div class="container">
-    <h2>Character sheet:</h2>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card" id="top-card">
-          <div class="card-body">
-            <form class="form">
-              <div class="row">
-                <div class="col-md-3">
-                  <label for="class-input">Player Type</label>
-                  <div class="input-group mb-3">
-                    <select class="custom-select" id="player-type-input">
-                      <option selected></option>
-                      <option value="Player Character">Player Character</option>
-                      <option value="Non-Player Character">Non-Player Character</option>
-                      <option value="Enemy">Enemy</option>
-                    </select>
+                  <div class="col-md-3">
+                    <label for="class-input">Class</label>
+                    <div class="input-group mb-3">
+                      <select class="custom-select" id="class-input">
+                        <option selected></option>
+                        <!--classes from API generate here-->
+                      </select>
+                    </div>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-md-3">
                     <label for="level-input">Level</label>
-                    <input type="text" class="form-control" id="level-input">
+                      <input type="text" class="form-control" id="level-input">
                   </div>
 
                   <div class="col-md-3">
@@ -98,7 +86,7 @@
                   </div>
                 </div>
 
-                 <div class="row">
+                <div class="row">
                     <div class="col-md-12">
                       <label for="alignment-input">Alignment</label>
                       <textarea class="form-control" rows="3" id="alignment-input"></textarea>
@@ -110,7 +98,6 @@
         </div>
       </div>
     </div>
-  </div>
 
   <div class="container">
     <div class="row">
