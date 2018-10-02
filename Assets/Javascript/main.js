@@ -1,4 +1,4 @@
-$(document).on('ready', function () {
+$(document).ready( function () {
       // Initialize Firebase
   var config = {
     apiKey: "AIzaSyA7u4I8S7T1qOUo7iFhdSfW0qLx1xi3Mxg",
@@ -10,39 +10,51 @@ $(document).on('ready', function () {
   };
 
   firebase.initializeApp(config);
-
-  var dataRef = firebase.database();
-  var playref = dataref.child('Characters');
-  var enemyref = dataref.child('enemies');
-  var npcref = dataref.child('NPC')
+  
+  var dataref = firebase.database();
+  var playref = dataref.ref().child('Characters');
+  var enemyref = dataref.ref().child('Enemies');
+  var npcref = dataref.ref().child('NPC')
   //TODO add children
-  playref.ref().on("child_added", function(snap) {
+  playref.on("child_added", function(snap) {
     console.log("Working?" + snap.val().charName);
     var charName = snap.val().charName;
-
+    var char = $("<a href='#'>").text(charName);
+    char.addClass('char-info');
+    char.attr('data-type', 'player');
     // Output character info
-    $("#players").append($("<a>").text(charName));
+    $("#players").append(char);
   });
 
   //
-  npcref.ref().on("child_added", function(snap) {
+  npcref.on("child_added", function(snap) {
     console.log("Working?" + snap.val().charName);
     var charName = snap.val().charName;
-
+    var char = $("<a href='#'>").text(charName);
+    char.addClass('char-info');
+    char.attr('data-type', 'npc');
     // Output character info
-    $("#npc").append($("<a>").text(charName));
+    $("#npcs").append(char);
   });
 
-  enemyref.ref().on("child_added", function(snap) {
+  enemyref.on("child_added", function(snap) {
     console.log("Working?" + snap.val().charName);
     var charName = snap.val().charName;
-    var char = $("<a>").text(charName);
+    var char = $("<a href='#'>").text(charName);
     char.addClass('char-info');
+    char.attr('data-type', 'enemy');
     // Output character info
     $("#enemies").append(char);
   });
 
-  $('.char-info').on('click', )
+  //TODO: use this to display Character info!
+  //Use this.text() to search the database
+  // $('.char-info').on('click', function() {
+        //var type = $(this).attr(type);
+        //var name = $(this).text()
+        //var char = dataref.ref().child(type).child(name);
+        //do stuff with char on page
+  // })
 
     // var charName = snap.val().charName;
     // var playName = snap.val().playName;
@@ -66,4 +78,5 @@ $(document).on('ready', function () {
     // var ideals = snap.val().ideals;
     // var bonds = snap.val().bonds;
     // var flaws = snap.val().flaws;
+    // var ac = snap.val().ac;
 })
