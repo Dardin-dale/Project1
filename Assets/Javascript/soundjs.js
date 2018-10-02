@@ -36,49 +36,61 @@ $(document).on('ready', function () {
        */
 
        // TODO: Show Object Results
-      function updatePage(YouTubeData) {
+      function getVideo(YouTubeData) {
 
         // Log the YouTubeData to console, where it will show up as an object
         console.log(YouTubeData);
         console.log("------------------------------------");
+        
+        //var numvideos = YouTubeData.pageInfo.resultsPerPage;
+      $.each(YouTubeData.items, function(i, item){
+        console.log(item);
+        vid = item.id.videoId;
+        
 
-        // // Loop through and build elements for the defined number of videos
-        // for (var i = 0; i < numvideos; i++) {
+//item.contentdetails
+//id.videoId = "NUBpsYZEv7s"
+//https://www.youtube.com/watch?v=NUBpsYZEv7s
+     // })
+  //  }
         //   // Get specific video info for current index
-        //   var video = YouTubeData.response.docs[i];
-
+           
+       // TODO: Show Object Results
+      // function updatePage(vid)
         //   // Increase the videoCount (track video # - starting at 1)
-        var videoCount = i + 1;
+        console.log("inside video to page")
+        
+ //      var videoCount = i + 1;
 
-        //   // Create the  list group to contain the videos and add the video content for each
-        //   var $videoList = $("<ul>");
-        //   $videoList.addClass("list-group");
+           // Create the  list group to contain the videos and add the video content for each
+          var $videoList = $("<ul>");
+           $videoList.addClass("list-group");
 
-        //   // Add the newly created element to the DOM
-        //   $("#video-section").append($videoList);
+           // Add the newly created element to the DOM
+           $("#video-section").append($videoList);
 
-        //   // If the video has a headline, log and append to $videoList
-        //   var headline = video.headline;
-        //   var $videoListItem = $("<li class='list-group-item videoHeadline'>");
+           // If the video has a headline, log and append to $videoList
+           var headline = item.snippet.title;
+           var $videoListItem = $("<li class='list-group-item videoHeadline'>");
 
-        //   if (headline && headline.main) {
-        //     console.log(headline.main);
-        //     $videoListItem.append(
-        //       "<span class='label label-primary'>" +
-        //       videoCount +
-        //       "</span>" +
-        //       "<strong> " +
-        //       headline.main +
-        //       "</strong>"
-        //     );
-        //   }
+  //         if (headline && item.snippet.channelTitle) {
+            console.log(item.snippet.channelTitle);
+             $videoListItem.append(
+               "<h4><span class='label label-primary'>" +
+               (i+1) +
+               "</span>" +
+               "<strong> " +
+               headline +
+               "</strong><h4>"
+             );
+   //        }
 
-        //   // If the video has a byline, log and append to $videoList
-        //   var byline = video.byline;
-
-        //   if (byline && byline.original) {
-        //     console.log(byline.original);
-        //     $videoListItem.append("<h5>" + byline.original + "</h5>");
+        //   // If the video has a description, log and append to $videoList
+           var description = item.snippet.description;
+console.log(description);
+        //   if (description && description.original) {
+        //     console.log(description.original);
+             $videoListItem.append("<h5>" + description + "</h5>");
         //   }
 
         //   // Log section, and append to document if exists
@@ -96,13 +108,15 @@ $(document).on('ready', function () {
         //   }
 
         //   // Append and log url
-        //   $videoListItem.append("<a href='" + video.web_url + "'>" + video.web_url + "</a>");
-        //   console.log(video.web_url);
+          $videoListItem.append("<a href='http://www.youtube.com/watch?v=" + vid + "'>" + "http://www.youtube.com/watch?v=" + vid + "</a>");
+           console.log(vid);
 
         //   // Append the video
-        //   $videoList.append($videoListItem);
-        //}
+           $videoList.append($videoListItem);
+      })
       }
+
+
 
       // Function to empty out the videos
       function clear() {
@@ -129,13 +143,13 @@ $(document).on('ready', function () {
         $.ajax({
           url: queryURL,
           method: "GET"
-            
          }) .done(function (result) {
               console.log(result);
+              getVideo(result);
             }).fail(function (err) {
               throw err;
             })
-           // .then(updatePage)
+            //.then(updatePage)
         })
       });
     

@@ -41,7 +41,31 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+  <div id="buttons">
+    <label> <input id="query" value='' type="text" />
+      <button id="search-button">Search</button></label>
+  </div>
+  <div id="search-container">
+  </div>
 
+  <div class="row">
+    <div class="col-sm-12">
+      <br>
+
+      <!-- This card will initially be made up of a card and wells for each of the videos retrieved -->
+      <div class="card">
+
+        <!-- card Heading for the retrieved articles box -->
+        <div class="card-header">
+          <strong>Top Videos</strong>
+        </div>
+
+        <!-- This main card will hold each of the resulting videos -->
+        <div class="card-body" id="video-section">
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Accordion Card and list groups -->
   <div class="accordion" id="accordionExample">
     <div class="card">
@@ -129,12 +153,7 @@
   </div>
 
 
-  <div id="buttons">
-    <label> <input id="query" value='' type="text" />
-      <button id="search-button">Search</button></label>
-  </div>
-  <div id="search-container">
-  </div>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!--script src="./Assets/Javascript/auth.js"></script-->
   <!--script src="./Assets/Javascript/search.js"></script-->
