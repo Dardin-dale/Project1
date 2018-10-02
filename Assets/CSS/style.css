@@ -29,3 +29,7 @@ hr{
 .card{
   background: rgba(161, 77, 77, .5);
 }
+
+#content-card{
+  background: none;
+}
