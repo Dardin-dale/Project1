@@ -98,16 +98,17 @@
         </div>
       </div>
     </div>
-      
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="card" id="roll-card">
-            <div class="card-body">
-              <h5 class="card-title">Ability Scores</h5>
-              <div>
-              <button type="button" id="preset-button" class="btn btn-dark">Use Preset</button>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card" id="roll-card">
+          <div class="card-body">
+            <h5 class="card-title">Ability Scores</h5>
+            <div id="ability-score-vals">
+              <p>Reccommended Presets: 15,14,13,12,10,8 (Then add Class and Race bonuses)</p>
               <button type="button" id="roll-button" class="btn btn-dark">Roll</button>
+              <div id="rollys"></div>
               <div>
                 <label for="strength-input">Strength</label>
                 <input type="text" class="form-control" id="strength-input">
@@ -137,34 +138,34 @@
                 <label for="charisma-input">Charisma</label>
                 <input type="text" class="form-control" id="charisma-input">
               </div>
-              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="col-md-3">
-          <div class="card" id="skills-card">
-            <div class="card-body">
-              <h5 class="card-title">Skills</h5>
-              <button type="button" id="add-skill-button" class="btn btn-dark">Add skill</button>
-              <div id="skills-input">
+      <div class="col-md-3">
+        <div class="card" id="skills-card">
+          <div class="card-body">
+            <h5 class="card-title">Skills</h5>
+            <button type="button" id="add-skill-button" class="btn btn-dark">Add skill</button>
+            <div id="skills-input">
               <!--New skills generate here-->
-              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="col-md-3">
-            <div class="card" id="saving-throws-card">
-              <div class="card-body">
-                <h5 class="card-title">Saving Throws</h5>
-                <button type="button" id="add-saving-throw-button" class="btn btn-dark">Add saving throw</button>
-                <div id="saving-throws-input">
-                <!--Saving throws generate here-->
-                </div>
-              </div>
+      <div class="col-md-3">
+        <div class="card" id="saving-throws-card">
+          <div class="card-body">
+            <h5 class="card-title">Saving Throws</h5>
+            <button type="button" id="add-saving-throw-button" class="btn btn-dark">Add saving throw</button>
+            <div id="saving-throws-input">
+              <!--Saving throws generate here-->
             </div>
           </div>
+        </div>
+      </div>
 
         <div class="col-md-3">
           <div class="card" id="personality-card">
@@ -175,80 +176,81 @@
               <label for="proficiencies-input">Proficiencies</label>
               <textarea class="form-control" rows="6" id="proficiencies-input"></textarea>
 
-              <label for="ideals-input">Ideals</label>
-              <textarea class="form-control" rows="3" id="ideals-input"></textarea>
+            <label for="ideals-input">Ideals</label>
+            <textarea class="form-control" rows="3" id="ideals-input"></textarea>
 
-              <label for="bonds-input">Bonds</label>
-              <textarea class="form-control" rows="3" id="bonds-input"></textarea>
+            <label for="bonds-input">Bonds</label>
+            <textarea class="form-control" rows="3" id="bonds-input"></textarea>
 
-              <label for="flaws-input">Flaws</label>
-              <textarea class="form-control" rows="3" id="flaws-input"></textarea>
-            </div>
+            <label for="flaws-input">Flaws</label>
+            <textarea class="form-control" rows="3" id="flaws-input"></textarea>
           </div>
         </div>
       </div>
-
+    </div>
 
 
   </div>
 
-    <button type="submit" id="submit-char-sheet" class="btn btn-dark">Submit</button>
+  <button type="submit" id="submit-char-sheet" class="btn btn-dark">Submit</button>
 
 
-<!-- Skills Modal -->
-<div class="modal fade" id="newSkill" tabindex="-1" role="dialog" aria-labelledby="newSkill" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Skill</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="input-group">
-          <input type="text" class="form-control" aria-label="skill name" id="new-skill-input">
+  <!-- Skills Modal -->
+  <div class="modal fade" id="newSkill" tabindex="-1" role="dialog" aria-labelledby="newSkill" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Skill</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="save-skill">Save changes</button>
+        <div class="modal-body">
+          <div class="input-group">
+            <input type="text" class="form-control" aria-label="skill name" id="new-skill-input">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="save-skill">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Saves Modal -->
-<div class="modal fade" id="newSave" tabindex="-1" role="dialog" aria-labelledby="newSave" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Save</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="input-group">
-          <input type="text" class="form-control" aria-label="skill name" id="new-save-input">
+  <!-- Saves Modal -->
+  <div class="modal fade" id="newSave" tabindex="-1" role="dialog" aria-labelledby="newSave" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Save</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="save-save">Save changes</button>
+        <div class="modal-body">
+          <div class="input-group">
+            <input type="text" class="form-control" aria-label="skill name" id="new-save-input">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="save-save">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
-    <script src="Assets/Javascript/characterSheet.js"></script>
-  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+    crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+  <script src="Assets/Javascript/characterSheet.js"></script>
+</body>
+
 </html>
