@@ -147,6 +147,9 @@ var level = 0;
 var race = "";
 var subclass = "";
 var ep = 0;
+var health = 0;
+var speed = 0;
+var armorClass = 0;
 var background = "";
 var alignment = "";
 var strength = "";
@@ -174,6 +177,9 @@ $("#submit-char-sheet").on("click", function (event) {
     race = $("#race-input :selected").data("name");
     subclass = $("#subclass-input").val().trim();
     ep = $("#ep-input").val().trim();
+    health = $("#health-input").val().trim();
+    speed = $("#speed-input").val().trim();
+    armorClass = $("#armor-class-input").val().trim();
     background = $("#background-input").val().trim();
     alignment = $("#alignment-input").val().trim();
     strength = $("#strength-input").val().trim();
@@ -219,6 +225,9 @@ $("#submit-char-sheet").on("click", function (event) {
             race,
             subclass,
             ep,
+            health,
+            speed,
+            armorClass,
             background,
             alignment,
             strength,
@@ -245,6 +254,9 @@ $("#submit-char-sheet").on("click", function (event) {
             race,
             subclass,
             ep,
+            health,
+            speed,
+            armorClass,
             background,
             alignment,
             strength,
@@ -271,6 +283,9 @@ $("#submit-char-sheet").on("click", function (event) {
             race,
             subclass,
             ep,
+            health,
+            speed,
+            armorClass,
             background,
             alignment,
             strength,
