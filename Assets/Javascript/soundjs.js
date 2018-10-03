@@ -41,11 +41,11 @@ $(document).on('ready', function () {
         // Log the YouTubeData to console, where it will show up as an object
         console.log(YouTubeData);
         console.log("------------------------------------");
-        
+        var $videoList = $("<ul>");
         //var numvideos = YouTubeData.pageInfo.resultsPerPage;
       $.each(YouTubeData.items, function(i, item){
         console.log(item);
-        vid = item.id.videoId;
+      var  vid = item.id.videoId;
         
 
 //item.contentdetails
@@ -63,7 +63,7 @@ $(document).on('ready', function () {
  //      var videoCount = i + 1;
 
            // Create the  list group to contain the videos and add the video content for each
-          var $videoList = $("<ul>");
+          
            $videoList.addClass("list-group");
 
            // Add the newly created element to the DOM
@@ -71,7 +71,7 @@ $(document).on('ready', function () {
 
            // If the video has a headline, log and append to $videoList
            var headline = item.snippet.title;
-           var $videoListItem = $("<li class='list-group-item videoHeadline'>");
+           var $videoListItem = $(`<li class='list-group-item videoHeadline' id=${i+1}>`);
 
   //         if (headline && item.snippet.channelTitle) {
             console.log(item.snippet.channelTitle);
@@ -83,6 +83,7 @@ $(document).on('ready', function () {
                headline +
                "</strong><h4>"
              );
+            
    //        }
 
         //   // If the video has a description, log and append to $videoList
@@ -90,7 +91,7 @@ $(document).on('ready', function () {
 console.log(description);
         //   if (description && description.original) {
         //     console.log(description.original);
-             $videoListItem.append("<h5>" + description + "</h5>");
+             $videoListItem.append( description);
         //   }
 
         //   // Log section, and append to document if exists
@@ -108,13 +109,20 @@ console.log(description);
         //   }
 
         //   // Append and log url
-          $videoListItem.append("<a href='http://www.youtube.com/watch?v=" + vid + "'>" + "http://www.youtube.com/watch?v=" + vid + "</a>");
-           console.log(vid);
+          $videoListItem.append(`<a href='http://www.youtube.com/watch?v=${vid}'>http://www.youtube.com/watch?v=${vid}</a>`);
+          $videoListItem.append(`<iframe class="ytplayer" type="text/html" width="200" height="100" src="https://www.youtube.com/embed/${vid}" frameborder='0' allowfullscreen>`)
+          $("iframe").hide(); 
+          console.log(vid);
 
         //   // Append the video
            $videoList.append($videoListItem);
       })
       }
+
+      $(document).on("click", ".list-group-item", function(event){
+        $(this).children('iframe').show();
+        console.log('card id', $(this).attr('id'));
+     })
 
 
 
