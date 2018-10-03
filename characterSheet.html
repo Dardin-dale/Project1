@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-    <link rel="stylesheet" href="Assets/CSS/style.css">
+    <link rel="stylesheet" href="Assets/CSS/charSheet.css">
   </head>
   <body>
 
@@ -79,6 +79,23 @@
                   </div>
                 </div>
 
+                <div class ="row">
+                  <div class="col-md-3">
+                    <label for="">Health</label>
+                    <input type="text" class="form-control" id="health-input">
+                  </div>
+
+                  <div class="col-md-3">
+                    <label for="">Speed</label>
+                    <input type="text" class="form-control" id="speed-input">
+                  </div>
+
+                  <div class="col-md-3">
+                    <label for="">Armor Class</label>
+                    <input type="text" class="form-control" id="armor-class-input">
+                  </div>
+                </div>
+
                 <div class="row">
                   <div class="col-md-12">
                     <label for="background-input">Background</label>
@@ -87,11 +104,11 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12">
-                      <label for="alignment-input">Alignment</label>
-                      <textarea class="form-control" rows="3" id="alignment-input"></textarea>
-                    </div>
+                  <div class="col-md-12">
+                    <label for="alignment-input">Alignment</label>
+                    <textarea class="form-control" rows="3" id="alignment-input"></textarea>
                   </div>
+                </div>
               </form>
             </div>
           </div>
@@ -106,7 +123,7 @@
           <div class="card-body">
             <h5 class="card-title">Ability Scores</h5>
             <div id="ability-score-vals">
-              <p>Reccommended Presets: 15,14,13,12,10,8 (Then add Class and Race bonuses)</p>
+              <p>Recommended Presets: 15,14,13,12,10,8 (Then add Class and Race bonuses)</p>
               <button type="button" id="roll-button" class="btn btn-dark">Roll</button>
               <div id="rollys"></div>
               <div>
