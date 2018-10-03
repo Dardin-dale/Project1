@@ -46,31 +46,7 @@
   <div></div>
 
   <!-- Create the search Button -->
-  <div id="buttons">
-    <label> <input id="query" value='' type="text" />
-      <button type="submit" class="btn btn-primary" button id="search-button">Search</button>
-  </div>
-  <div id="search-container">
-  </div>
-
-  <div class="row">
-    <div class="col-sm-12">
-      <br>
-
-      <!-- This card will initially be made up of a card and wells for each of the videos retrieved -->
-      <div class="card">
-
-        <!-- card Heading for the retrieved articles box -->
-        <div class="card-header">
-          <strong>Top Videos</strong>
-        </div>
-
-        <!-- This main card will hold each of the resulting videos -->
-        <div class="card-body" id="video-section">
-        </div>
-      </div>
-    </div>
-  </div>
+  
   <!-- Accordion Card and list groups -->
   <div class="accordion" id="accordionExample">
     <div class="card">
@@ -118,6 +94,39 @@
     </div>
   </div>
 
+  <button id='modal-search-btn' data-target="#search-modal" data-toggle="modal">search</button>
+  <!-- Modals -->
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id='search-modal'>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div id="buttons">
+          <label> <input id="query" value='' type="text" />
+            <button type="submit" class="btn btn-primary" button id="search-button">Search</button>
+        </div>
+        <div id="search-container">
+        </div>
+      
+        <div class="row">
+          <div class="col-sm-12">
+            <br>
+      
+            <!-- This card will initially be made up of a card and wells for each of the videos retrieved -->
+            <div class="card">
+      
+              <!-- card Heading for the retrieved articles box -->
+              <div class="card-header">
+                <strong>Top Videos</strong>
+              </div>
+      
+              <!-- This main card will hold each of the resulting videos -->
+              <div class="card-body" id="video-section">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
