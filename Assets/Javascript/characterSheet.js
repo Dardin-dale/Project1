@@ -244,6 +244,7 @@ $("#submit-char-sheet").on("click", function (event) {
             bonds,
             flaws
         });
+        $('#charAdded').modal("toggle");
     } else if (type === "Non-Player Character") {
         // Code for the push
         dataRef.ref().child("NPC").child(charName).set({
@@ -273,6 +274,7 @@ $("#submit-char-sheet").on("click", function (event) {
             bonds,
             flaws
         });
+        $('#charAdded').modal("toggle");
     } else if (type === "Enemy") {
         // Code for the push
         dataRef.ref().child("Enemies").child(charName).set({
@@ -302,6 +304,7 @@ $("#submit-char-sheet").on("click", function (event) {
             bonds,
             flaws
         });
+        $('#charAdded').modal("toggle");
     }
 });
 
@@ -359,4 +362,12 @@ $('#roll-button').on('click', function() {
     var newP = $('<p>').text('Rolled Values: '+ rolls);
     $('#rollys').append(newP);
     
+})
+
+$('#newChar').on('click', function(){
+    window.location.href='characterSheet.html';
+})
+
+$('#home').on('click', function(){
+    window.location.href='index.html';
 })
