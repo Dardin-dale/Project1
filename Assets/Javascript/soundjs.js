@@ -1,5 +1,4 @@
 $(document).on('ready', function () {
-
   //TODO: Add YouTube API configs
   function buildQueryURL() {
     var queryURL = "https://www.googleapis.com/youtube/v3/search?";
@@ -8,7 +7,7 @@ $(document).on('ready', function () {
     };
 
     //  TODO: parseInt for maxResults
-    queryParams.maxResults = "25";
+    queryParams.maxResults = "10";
     queryParams.q = $("#query").val().trim();
     queryParams.key = "AIzaSyCK1f80S0SXKMViZTaj13rj0BqS0ay3RC4"
 
@@ -31,23 +30,21 @@ $(document).on('ready', function () {
     // Log the YouTubeData to console, where it will show up as an object
     console.log(YouTubeData);
     console.log("------------------------------------");
-
+    var $videoList = $("<ul>");
     //var numvideos = YouTubeData.pageInfo.resultsPerPage;
     $.each(YouTubeData.items, function (i, item) {
       console.log(item);
-      vid = item.id.videoId;
+      var vid = item.id.videoId;
 
       //   // Increase the videoCount (track video # - starting at 1)
       console.log("inside video to page")
 
 
       // Create the  list group to contain the videos and add the video content for each
-      var $videoList = $("<ul>");
       $videoList.addClass("list-group");
       var $playListbutton = $("<button>");
       $playListbutton.addClass("btn btn-primary");
       $playListbutton.attr('id', 'addSongtoPlaylistbtn');
-
 
       // Add the newly created element to the DOM
       $("#video-section").append($videoList);
@@ -55,7 +52,7 @@ $(document).on('ready', function () {
 
       // If the video has a headline, log and append to $videoList
       var headline = item.snippet.title;
-      var $videoListItem = $("<li class='list-group-item videoHeadline'>");
+      var $videoListItem = $(`<li class='list-group-item videoHeadline' id=${i+1}>`);
 
       //         if (headline && item.snippet.channelTitle) {
       console.log(item.snippet.channelTitle);
@@ -67,23 +64,34 @@ $(document).on('ready', function () {
         headline +
         "</strong><h4>"
       );
+
       //        }
 
       //   // If the video has a description, log and append to $videoList
       var description = item.snippet.description;
       console.log(description);
-      $videoListItem.append("<h5>" + description + "</h5>");
+      //   if (description && description.original) {
+      //     console.log(description.original);
+      $videoListItem.append(description);
       //   }
 
 
       //   // Append and log url
-      $videoListItem.append("<a href='http://www.youtube.com/watch?v=" + vid + "'>" + "http://www.youtube.com/watch?v=" + vid + "</a>");
+      $videoListItem.append(`<a href='http://www.youtube.com/watch?v=${vid}'>http://www.youtube.com/watch?v=${vid}</a>`);
+      $videoListItem.append(`<iframe class="ytplayer" type="text/html" width="200" height="100" src="https://www.youtube.com/embed/${vid}" frameborder='0' allowfullscreen>`)
+      $("iframe").hide();
       console.log(vid);
 
       //   // Append the video
       $videoList.append($videoListItem);
     })
   }
+
+  $(document).on("click", ".list-group-item", function (event) {
+    $(this).children('iframe').show();
+    console.log('card id', $(this).attr('id'));
+  })
+
 
 
   // Function to empty out the videos
@@ -95,6 +103,9 @@ $(document).on('ready', function () {
   // ==========================================================
 
   $("#search-button").on("click", function (event) {
+    // This line allows us to take advantage of the HTML "submit" property
+    // This way we can hit enter on the keyboard and it registers the search
+    // (in addition to clicks). Prevents the page from reloading on form submit.
     event.preventDefault();
 
     // Empty the region associated with the videos
@@ -117,8 +128,6 @@ $(document).on('ready', function () {
     //.then(updatePage)
   })
 });
-
-
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyA7u4I8S7T1qOUo7iFhdSfW0qLx1xi3Mxg",
