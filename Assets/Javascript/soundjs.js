@@ -158,3 +158,7 @@ $("#addToPlaylistbtn").on("click", function (event) {
   console.log(userInput)
   $("#playList1").text(userInput);
 });
+
+$('#modal-search-btn').on('click', function(){
+  $('#search-modal').toggle();
+})
