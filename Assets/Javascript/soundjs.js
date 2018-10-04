@@ -1,4 +1,7 @@
+
+
 $(document).on('ready', function () {
+  var ajaxData;
   //TODO: Add YouTube API configs
   function buildQueryURL() {
     var queryURL = "https://www.googleapis.com/youtube/v3/search?";
@@ -11,7 +14,6 @@ $(document).on('ready', function () {
     queryParams.q = $("#query").val().trim();
     queryParams.key = "AIzaSyCK1f80S0SXKMViZTaj13rj0BqS0ay3RC4"
 
-    //?part=snippet&maxResults=25&q=surfing&key=
 
     // Logging the URL so we have access to it for troubleshooting
     console.log("---------------\nURL: " + queryURL + "\n---------------");
@@ -26,7 +28,7 @@ $(document).on('ready', function () {
 
   // TODO: Show Object Results
   function getVideo(YouTubeData) {
-
+    ajaxData = YouTubeData
     // Log the YouTubeData to console, where it will show up as an object
     console.log(YouTubeData);
     console.log("------------------------------------");
@@ -36,6 +38,8 @@ $(document).on('ready', function () {
       console.log(item);
       var vid = item.id.videoId;
 
+
+
       //   // Increase the videoCount (track video # - starting at 1)
       console.log("inside video to page")
 
@@ -44,15 +48,16 @@ $(document).on('ready', function () {
       $videoList.addClass("list-group");
       var $playListbutton = $("<button>");
       $playListbutton.addClass("btn btn-primary");
-      $playListbutton.attr('id', 'addSongtoPlaylistbtn');
+      $playListbutton.addClass('addSongtoPlaylistbtn');
+      $playListbutton.attr('value', i)
 
       // Add the newly created element to the DOM
       $("#video-section").append($videoList);
-      $("#video-section").append($playListbutton);
+
 
       // If the video has a headline, log and append to $videoList
       var headline = item.snippet.title;
-      var $videoListItem = $(`<li class='list-group-item videoHeadline' id=${i+1}>`);
+      var $videoListItem = $(`<li class='list-group-item videoHeadline' id=${i + 1}>`);
 
       //         if (headline && item.snippet.channelTitle) {
       console.log(item.snippet.channelTitle);
@@ -65,24 +70,25 @@ $(document).on('ready', function () {
         "</strong><h4>"
       );
 
-      //        }
+      //Testing add playlist button after varivale is declared
+      $($videoListItem).append($playListbutton);
 
-      //   // If the video has a description, log and append to $videoList
+
+      // If the video has a description, log and append to $videoList
       var description = item.snippet.description;
       console.log(description);
-      //   if (description && description.original) {
-      //     console.log(description.original);
       $videoListItem.append(description);
-      //   }
 
 
-      //   // Append and log url
+
+      // Append and log url
       $videoListItem.append(`<a href='http://www.youtube.com/watch?v=${vid}'>http://www.youtube.com/watch?v=${vid}</a>`);
       $videoListItem.append(`<iframe class="ytplayer" type="text/html" width="200" height="100" src="https://www.youtube.com/embed/${vid}" frameborder='0' allowfullscreen>`)
       $("iframe").hide();
       console.log(vid);
 
-      //   // Append the video
+      // Append the video
+      console.log("look at me" , $videoListItem)
       $videoList.append($videoListItem);
     })
   }
@@ -139,19 +145,25 @@ var config = {
 };
 firebase.initializeApp(config);
 
-//Code for pushing to database
-var dataRef = firebase.database();
-$("#addSongtoPlaylistbtn").on("click", function (event) {
-  event.preventDefault();
-  console.log(event);
-  dataRef.ref().child("playlist").child(playlist).set({
-    playlist,
-  });
 
+$(document).on("click", ".list-group-item", function (event) {
+  $(this).children('iframe').show();
+  console.log('card id', $(this).attr('id'));
+})
+//Code for pushing to database 
+// ALDO HELPED HERE>>>>>>>>>>>>>
+var dataRef = firebase.database();
+$(document).on("click", ".addSongtoPlaylistbtn", function (event) {
+  console.log(event.target.value, "attach a string to this thing")
+
+  .push(ajaxData.items[event.target.value])
+  event.preventDefault();
+  console.log("firebase push ", event);
+  firebase.database().ref('playlist').push(event)
 });
 
 //onclick for add to playlist button
-$("#addToPlaylistbtn").on("click", function (event) {
+$(".addToPlaylistbtn").on("click", function (event) {
   event.preventDefault();
   console.log(event);
   var userInput = $('#user-text').val()
@@ -159,6 +171,6 @@ $("#addToPlaylistbtn").on("click", function (event) {
   $("#playList1").text(userInput);
 });
 
-$('#modal-search-btn').on('click', function(){
-  $('#search-modal').toggle();
+$('#modal-search-btn').on('click', function () {
+  $('#search-modal').modal('toggle');
 })
