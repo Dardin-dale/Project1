@@ -77,7 +77,7 @@ $(document).on('ready', function () {
 
 
       //   // Append and log url
-      $videoListItem.append(`<a href='http://www.youtube.com/watch?v=${vid}'>http://www.youtube.com/watch?v=${vid}</a>`);
+      //$videoListItem.append(`<a href='http://www.youtube.com/watch?v=${vid}'>http://www.youtube.com/watch?v=${vid}</a>`);
       $videoListItem.append(`<iframe class="ytplayer" type="text/html" width="200" height="100" src="https://www.youtube.com/embed/${vid}" frameborder='0' allowfullscreen>`)
       $("iframe").hide();
       console.log(vid);
@@ -85,6 +85,7 @@ $(document).on('ready', function () {
       //   // Append the video
       $videoList.append($videoListItem);
     })
+    $("iframe").hide();
   }
 
   $(document).on("click", ".list-group-item", function (event) {
