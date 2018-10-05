@@ -1,7 +1,6 @@
 body{
-  background: rgba(19, 18, 18, 0.95);
+  background-image: url(../Images/dark-daylight.jpg);
   color: white;
-  margin: 30px 0;
 }
 .card{
   background: rgba(161, 77, 77, .5);
@@ -10,6 +9,7 @@ body{
 
 h1{
   font-family: 'Aladin', cursive;
+  margin-top: 40px;
 }
 
 .btn{
@@ -18,10 +18,24 @@ h1{
   color: white;
 }
 
+.btn:hover{
+  background-color: rgba(76, 163, 84, 0.8);
+  color: white;
+}
+
 #submit-char-sheet{
   background-color: darkred;
+  margin-bottom: 15px;
+}
+
+#submit-char-sheet:hover{
+  background-color: rgb(153, 57, 57);
 }
 
 .modal .modal-dialog .modal-content{  
-  background: rgb(122, 73, 73);
+  background: rgb(99, 57, 57);
+ }
+
+ a{
+   color: white;
  }
