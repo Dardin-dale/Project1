@@ -8,11 +8,26 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
     <link rel="stylesheet" href="Assets/CSS/charSheet.css">
+    <link href="https://fonts.googleapis.com/css?family=Aladin" rel="stylesheet">
   </head>
   <body>
 
+      <!--Top nav-->
+  <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" id="home-nav" href="index.html">DM Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="character-sheet-nav" href="characterSheet.html">Character Sheets</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="music-library-nav" href="soundLibrary.html">Build Music Library</a>
+      </li>
+    </ul>
+
     <div class="container">
-      <h2>Character sheet:</h2>
+      <h1>Character sheet:</h1>
+      <button type="submit" id="submit-char-sheet" class="btn btn-dark">Submit</button>
       <div class="row">
         <div class="col-md-12">
           <div class="card" id="top-card">
@@ -202,15 +217,11 @@
             <label for="flaws-input">Flaws</label>
             <textarea class="form-control" rows="3" id="flaws-input"></textarea>
           </div>
+
         </div>
       </div>
     </div>
-
-
   </div>
-
-  <button type="submit" id="submit-char-sheet" class="btn btn-dark">Submit</button>
-
 
   <!-- Skills Modal -->
   <div class="modal fade" id="newSkill" tabindex="-1" role="dialog" aria-labelledby="newSkill" aria-hidden="true">
