@@ -182,6 +182,44 @@ $("#addToPlaylistbtn").on("click", function (event) {
 // reference the childsnapshot data
 // dynamically create card that will live inside of the accordion
 // 
+database.ref().on("child_added", function(childSnapshot) {
+  console.log(childSnapshot.val());
+
+  // Store everything into a variable.
+  var empName = childSnapshot.val().name;
+  var empRole = childSnapshot.val().role;
+  var empStart = childSnapshot.val().start;
+  var empRate = childSnapshot.val().rate;
+
+  // Employee Info
+  console.log(empName);
+  console.log(empRole);
+  console.log(empStart);
+  console.log(empRate);
+
+});
+/*
+function accordionPlaylist(){
+  return (`<div class="card">
+      <div class="card-header" id="headingOne">
+      <h5 class="mb-0">'
+      <button class="btn btn-link" id="playList1"
+      type="button" data-toggle="collapse" 
+      data-target="#collapseOne" aria-expanded="true" 
+      aria-controls="collapseOne">
+         ${Playlist1}
+        </button>
+        </h5>
+      </div>
+  
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+      ${VideoTitle} //Title/Name should be pulled from the database}
+      </div></div></div>`
+   )
+}
+*/
+
 $('#modal-search-btn').on('click', function () {
   $('#search-modal').modal('toggle');
 })
