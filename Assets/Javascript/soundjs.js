@@ -80,9 +80,8 @@ $(document).on('ready', function () {
       $videoListItem.append(description);
 
 
-
-      // Append and log url
-      $videoListItem.append(`<a href='http://www.youtube.com/watch?v=${vid}'>http://www.youtube.com/watch?v=${vid}</a>`);
+      //   // Append and log url
+      //$videoListItem.append(`<a href='http://www.youtube.com/watch?v=${vid}'>http://www.youtube.com/watch?v=${vid}</a>`);
       $videoListItem.append(`<iframe class="ytplayer" type="text/html" width="200" height="100" src="https://www.youtube.com/embed/${vid}" frameborder='0' allowfullscreen>`)
       $("iframe").hide();
       console.log(vid);
@@ -91,6 +90,7 @@ $(document).on('ready', function () {
       console.log("look at me" , $videoListItem)
       $videoList.append($videoListItem);
     })
+    $("iframe").hide();
   }
 
   $(document).on("click", ".list-group-item", function (event) {
@@ -156,21 +156,32 @@ var dataRef = firebase.database();
 $(document).on("click", ".addSongtoPlaylistbtn", function (event) {
   console.log(event.target.value, "attach a string to this thing")
 
-  .push(ajaxData.items[event.target.value])
+  dataRef.ref().push(ajaxData.items[event.target.value])
   event.preventDefault();
   console.log("firebase push ", event);
   firebase.database().ref('playlist').push(event)
 });
 
 //onclick for add to playlist button
-$(".addToPlaylistbtn").on("click", function (event) {
+$("#addToPlaylistbtn").on("click", function (event) {
   event.preventDefault();
   console.log(event);
   var userInput = $('#user-text').val()
   console.log(userInput)
-  $("#playList1").text(userInput);
+
+  var videoArray = [0];
+  //TODO: Input starter youtube id for the user that they can delete later 
+  //dataRef.ref().child("Playlists").child(userInput).set({songs: []}) //ARRON's
+ // dataRef.ref().child("Playlists").child(userInput).push({songs:0});//ATTACK2
+  dataRef.ref().child("Playlists").push({userInput,videoArray});
+  //$("#playList1").text(userInput);
+
 });
 
+//TODO: create firebase event listener for user playlists
+// reference the childsnapshot data
+// dynamically create card that will live inside of the accordion
+// 
 $('#modal-search-btn').on('click', function () {
   $('#search-modal').modal('toggle');
 })
