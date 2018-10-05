@@ -1,0 +1,41 @@
+body{
+  background-image: url(../Images/dark-daylight.jpg);
+  color: white;
+}
+.card{
+  background: rgba(161, 77, 77, .5);
+  margin-bottom: 20px;
+}
+
+h1{
+  font-family: 'Aladin', cursive;
+  margin-top: 40px;
+}
+
+.btn{
+  background-color: rgb(16, 61, 20);
+  border: gray;
+  color: white;
+}
+
+.btn:hover{
+  background-color: rgba(76, 163, 84, 0.8);
+  color: white;
+}
+
+#submit-char-sheet{
+  background-color: darkred;
+  margin-bottom: 15px;
+}
+
+#submit-char-sheet:hover{
+  background-color: rgb(153, 57, 57);
+}
+
+.modal .modal-dialog .modal-content{  
+  background: rgb(99, 57, 57);
+ }
+
+ a{
+   color: white;
+ }
