@@ -14,7 +14,7 @@ $(document).ready(function () {
   var dataref = firebase.database();
   var playref = dataref.ref().child('Characters');
   var enemyref = dataref.ref().child('Enemies');
-  var npcref = dataref.ref().child('NPC')
+  var npcref = dataref.ref().child('NPC');
   
   function retrieveCharacter(charInfo, dataType, element) {
     var charEl = $("<div>").append($("<a href='#'>").text(charInfo.charName));
@@ -73,4 +73,29 @@ $(document).ready(function () {
   });
 
   $("#char-info-card").hide();
+
+  //##############################
+  // Music Library
+  //##############################
+  var libref = dataref.ref().child('Playlists');
+
+  //grabs the names of the playlists and adds buttons to the library.
+  libref.on("child_added", function (snap) {
+    var name = snap.key;
+    var newDiv = $('<div>');
+    var newBtn = $('<button class="btn btn-secondary playlist">');
+    newBtn.text(name);
+    newDiv.append(newBtn);
+    $('#library').append(newDiv);
+  })
+
+  //plays songs from the playlist
+  $('.playlist').on('click', function() {
+    var listName = $(this).text();
+    //grab the list and play a random song
+    libref.child(listName).once('value', function(snap) {
+      
+    })
+  })
+
 })
