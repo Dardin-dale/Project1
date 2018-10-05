@@ -175,7 +175,7 @@ $("#addToPlaylistbtn").on("click", function (event) {
   //TODO: Input starter youtube id for the user that they can delete later 
   //dataRef.ref().child("Playlists").child(userInput).set({songs: []}) //ARRON's
  // dataRef.ref().child("Playlists").child(userInput).push({songs:0});//ATTACK2
-  dataRef.ref().child("Playlists").push({userInput,videoArray});
+  dataRef.ref().child("Playlists").child(userInput).set({videoArray});
   //$("#playList1").text(userInput);
 
 });
