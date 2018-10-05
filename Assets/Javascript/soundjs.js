@@ -6,7 +6,8 @@ $(document).on('ready', function () {
   function buildQueryURL() {
     var queryURL = "https://www.googleapis.com/youtube/v3/search?";
     var queryParams = {
-      "part": "snippet"
+      "part": "snippet",
+      "format": "5"
     };
 
     //  TODO: parseInt for maxResults
