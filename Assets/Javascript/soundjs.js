@@ -49,7 +49,9 @@ $(document).on('ready', function () {
       var $playListbutton = $("<button>");
       $playListbutton.addClass("btn btn-primary");
       $playListbutton.addClass('addSongtoPlaylistbtn');
-      $playListbutton.attr('value', i)
+      $playListbutton.attr('value', i);
+      //Added a line to create a name for the button
+      $playListbutton.text("Click me to add song to playlist");
 
       // Add the newly created element to the DOM
       $("#video-section").append($videoList);
