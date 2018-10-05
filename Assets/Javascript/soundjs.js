@@ -6,7 +6,8 @@ $(document).on('ready', function () {
   function buildQueryURL() {
     var queryURL = "https://www.googleapis.com/youtube/v3/search?";
     var queryParams = {
-      "part": "snippet"
+      "part": "snippet",
+      "format": "5"
     };
 
     //  TODO: parseInt for maxResults
@@ -47,9 +48,11 @@ $(document).on('ready', function () {
       // Create the  list group to contain the videos and add the video content for each
       $videoList.addClass("list-group");
       var $playListbutton = $("<button>");
-      $playListbutton.addClass("btn btn-primary");
+      $playListbutton.addClass("btn btn-primary float-left");
       $playListbutton.addClass('addSongtoPlaylistbtn');
-      $playListbutton.attr('value', i)
+      $playListbutton.attr('value', i);
+      //Added a line to create a name for the button
+      $playListbutton.text("+");
 
       // Add the newly created element to the DOM
       $("#video-section").append($videoList);
@@ -62,41 +65,40 @@ $(document).on('ready', function () {
       //         if (headline && item.snippet.channelTitle) {
       console.log(item.snippet.channelTitle);
       $videoListItem.append(
-        "<h4><span class='label label-primary'>" +
-        (i + 1) +
-        "</span>" +
-        "<strong> " +
-        headline +
-        "</strong><h4>"
+        $("<p>")
+          .append($playListbutton)
+          .append(
+            $("<p>").text(headline)
+          )
       );
 
       //Testing add playlist button after varivale is declared
-      $($videoListItem).append($playListbutton);
+      // $($videoListItem).append($playListbutton);
 
 
-      // If the video has a description, log and append to $videoList
-      var description = item.snippet.description;
-      console.log(description);
-      $videoListItem.append(description);
+      // // If the video has a description, log and append to $videoList
+      // var description = item.snippet.description;
+      // console.log(description);
+      // $videoListItem.append(description);
 
 
       //   // Append and log url
       //$videoListItem.append(`<a href='http://www.youtube.com/watch?v=${vid}'>http://www.youtube.com/watch?v=${vid}</a>`);
       $videoListItem.append(`<iframe class="ytplayer" type="text/html" width="200" height="100" src="https://www.youtube.com/embed/${vid}" frameborder='0' allowfullscreen>`)
-      $("iframe").hide();
+      // $("iframe").hide();
       console.log(vid);
 
       // Append the video
       console.log("look at me" , $videoListItem)
       $videoList.append($videoListItem);
     })
-    $("iframe").hide();
+    // $("iframe").hide();
   }
 
-  $(document).on("click", ".list-group-item", function (event) {
-    $(this).children('iframe').show();
-    console.log('card id', $(this).attr('id'));
-  })
+  // $(document).on("click", ".list-group-item", function (event) {
+  //   $(this).children('iframe').show();
+  //   console.log('card id', $(this).attr('id'));
+  // })
 
 
 
@@ -173,7 +175,7 @@ $("#addToPlaylistbtn").on("click", function (event) {
   //TODO: Input starter youtube id for the user that they can delete later 
   //dataRef.ref().child("Playlists").child(userInput).set({songs: []}) //ARRON's
  // dataRef.ref().child("Playlists").child(userInput).push({songs:0});//ATTACK2
-  dataRef.ref().child("Playlists").push({userInput,videoArray});
+  dataRef.ref().child("Playlists").child(userInput).set({videoArray});
   //$("#playList1").text(userInput);
 
 });

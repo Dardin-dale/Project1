@@ -24,6 +24,11 @@ a{
   color: white;
 }
 
+.btn:hover{
+  background-color: rgba(76, 163, 84, 0.8);
+  color: white;
+}
+
 hr{
   border-color: white;
 }

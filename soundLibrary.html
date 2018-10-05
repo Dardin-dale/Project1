@@ -18,107 +18,157 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="Assets/CSS/soundstyle.css">
+    <link href="https://fonts.googleapis.com/css?family=Aladin" rel="stylesheet">
 
   <!--Youtube Data Search API:  key=AIzaSyCK1f80S0SXKMViZTaj13rj0BqS0ay3RC4-->
 </head>
 
 <body>
+  <!--Top nav-->
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" id="home-nav" href="index.html">DM Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="character-sheet-nav" href="characterSheet.html">Character Sheets</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="music-library-nav" href="soundLibrary.html">Build Music Library</a>
+    </li>
+  </ul>
+
+  <!--What's this for?-->
   <div id="player"></div>
-  <!-- Fluid Jumbotron -->
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">Sound Library</h1>
-      <p class="lead">Welcome to the world of sound library!</p>
+
+  <div class="container">
+    <h1>Sound Library</h1>
+    <div class="row">
+      <div class="col-md-3">
+        <form>
+          <label for="addToPlaylistbtn">Set your playlist title</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="user-text" aria-describedby="text" placeholder="cave, town, etc.">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-primary" id="addToPlaylistbtn">Submit</button>
+            </span>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
+
 
   <!-- Create a Playlist Button -->
-  <form>
-    <div class="form-group">
-      <label for="addToPlaylistbtn">Create your own Playlist</label>
-      <input type="text" class="form-control" id="user-text" aria-describedby="text" placeholder="Enter the sound your ears wish to hear">
-      <small id="emailHelp" class="form-text text-muted"></small>
-    </div>
-    <button type="submit" class="btn btn-primary"id="addToPlaylistbtn">Submit</button>
-  </form>
+
 
   <div></div>
   <div></div>
-
-  <!-- Create the search Button -->
-  
-  <!-- Accordion Card and list groups -->
-  <div class="accordion" id="accordionExample">
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <h5 class="mb-0">
-          <button class="btn btn-link" id="playList1" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Playlist #1
-          </button>
-        </h5>
-      </div>
-  
-      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-        <div class="card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-        </div>
+    <div class="row">
+      <div class="col-md-12">
+         <!-- Create the search Button -->
+        <button id='modal-search-btn' class="btn btn-primary" data-target="#search-modal" data-toggle="modal">Search Music</button>
       </div>
     </div>
-    <div class="card">
-      <div class="card-header" id="headingTwo">
-        <h5 class="mb-0">
-          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Playlist #2
-          </button>
-        </h5>
-      </div>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-        <div class="card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header" id="headingThree">
-        <h5 class="mb-0">
-          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            Playlist #3
-          </button>
-        </h5>
-      </div>
-      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-        <div class="card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+ 
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Accordion Card and list groups -->
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" id="playList1" type="button" data-toggle="collapse" data-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  Playlist #1
+                </button>
+              </h5>
+            </div>
+      
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
+                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
+                wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
+                excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
+                you probably haven't heard of them accusamus labore sustainable VHS.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  Playlist #2
+                </button>
+              </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <div class="card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
+                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
+                wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
+                excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
+                you probably haven't heard of them accusamus labore sustainable VHS.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+                  aria-expanded="false" aria-controls="collapseThree">
+                  Playlist #3
+                </button>
+              </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+              <div class="card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
+                officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
+                wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
+                excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
+                you probably haven't heard of them accusamus labore sustainable VHS.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <button id='modal-search-btn' data-target="#search-modal" data-toggle="modal">search</button>
-
   <!-- Modals -->
-  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id='search-modal'>
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true" id='search-modal'>
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div id="buttons">
-          <label> <input id="query" value='' type="text" />
-            <button type="submit" class="btn btn-primary" button id="search-button">Search</button>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span id="modal-close-button" aria-hidden="true">&times;</span>
+          </button>
         </div>
+
+        <div id="buttons">
+          <label>Search for music to add to your playlists:</label>
+          <input id="query" value='' type="text" />
+          <button type="submit" class="btn btn-primary" button id="search-button">Search</button>
+        </div>
+
+
         <div id="search-container">
         </div>
 
         <div class="row">
           <div class="col-sm-12">
             <br>
-      
+
             <!-- This card will initially be made up of a card and wells for each of the videos retrieved -->
             <div class="card">
-      
-              <!-- card Heading for the retrieved articles box -->
-              <div class="card-header">
-                <strong>Top Videos</strong>
-              </div>
-      
+
+
               <!-- This main card will hold each of the resulting videos -->
               <div class="card-body" id="video-section">
               </div>

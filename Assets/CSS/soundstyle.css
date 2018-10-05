@@ -1,0 +1,70 @@
+body{
+  background-image: url(../Images/dark-daylight.jpg);
+  color: white;
+}
+
+a{
+  color: white;
+}
+
+.tab-content{
+  background: rgba(161, 77, 77, .5);
+}
+
+h1{
+  font-family: 'Aladin', cursive;
+  margin-top: 40px;
+}
+
+.btn, .addSongtoPlaylistbtn {
+  background-color: rgba(17, 71, 22, 0.8);
+  border: gray;
+  color: white;
+}
+
+.btn:hover{
+  background-color: rgba(76, 163, 84, 0.8);
+  color: white;
+}
+
+hr{
+  border-color: white;
+}
+
+.card{
+  background: rgba(161, 77, 77, .5);
+}
+
+#video-section, .list-group, .list-group-item{
+  background: rgb(99, 57, 57);
+}
+
+.accordion{
+  margin-bottom: 20px;
+}
+
+#modal-search-btn{
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.modal .modal-dialog .modal-content{
+  background: rgb(99, 57, 57);
+}
+
+#buttons{
+  margin-left: 20px;
+  margin-top: 30px;
+}
+
+.addSongtoPlaylistbtn{
+  margin-right: 20px;
+}
+
+#modal-close-button{
+  color: white;
+}
+
+#query{
+  margin-left: 10px;
+}
