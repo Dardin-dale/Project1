@@ -15,8 +15,8 @@ $(document).on('ready', function () {
 
 
     // Logging the URL so we have access to it for troubleshooting
-    console.log("---------------\nURL: " + queryURL + "\n---------------");
-    console.log(queryURL + $.param(queryParams));
+    // console.log("---------------\nURL: " + queryURL + "\n---------------");
+    // console.log(queryURL + $.param(queryParams));
     return queryURL + $.param(queryParams);
   }
 
@@ -29,19 +29,19 @@ $(document).on('ready', function () {
   function getVideo(YouTubeData) {
     ajaxData = YouTubeData
     // Log the YouTubeData to console, where it will show up as an object
-    console.log(YouTubeData);
-    console.log("------------------------------------");
+    // console.log(YouTubeData);
+    // console.log("------------------------------------");
     var $videoList = $("<ul>");
     //var numvideos = YouTubeData.pageInfo.resultsPerPage;
     $.each(YouTubeData.items, function (i, item) {
-      console.log(item);
+      // console.log(item);
       var vid = item.id.videoId;
 
 
 
 
       //   // Increase the videoCount (track video # - starting at 1)
-      console.log("inside video to page")
+      // console.log("inside video to page")
 
 
       // Create the  list group to contain the videos and add the video content for each
@@ -62,7 +62,7 @@ $(document).on('ready', function () {
       var $videoListItem = $(`<li class='list-group-item videoHeadline' id=${i + 1}>`);
 
       //         if (headline && item.snippet.channelTitle) {
-      console.log(item.snippet.channelTitle);
+      // console.log(item.snippet.channelTitle);
       $videoListItem.append($("<p>")
           .append($playListbutton)
           .append(
@@ -84,10 +84,10 @@ $(document).on('ready', function () {
       //$videoListItem.append(`<a href='http://www.youtube.com/watch?v=${vid}'>http://www.youtube.com/watch?v=${vid}</a>`);
       $videoListItem.append(`<iframe class="ytplayer" type="text/html" width="200" height="100" src="https://www.youtube.com/embed/${vid}" frameborder='0' allowfullscreen>`)
       // $("iframe").hide();
-      console.log(vid);
+      // console.log(vid);
 
       // Append the video
-      console.log("look at me" , $videoListItem)
+      // console.log("look at me" , $videoListItem)
       $videoList.append($videoListItem);
     })
     // $("iframe").hide();
@@ -124,14 +124,14 @@ $(document).on('ready', function () {
       url: queryURL,
       method: "GET"
     }).done(function (result) {
-      console.log(result);
+      // console.log(result);
       getVideo(result);
     }).fail(function (err) {
       throw err;
     })
     //.then(updatePage)
   })
-});
+
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyA7u4I8S7T1qOUo7iFhdSfW0qLx1xi3Mxg",
@@ -154,17 +154,21 @@ $(document).on("click", ".addSongtoPlaylistbtn", function (event) {
   event.preventDefault();
   var playlist = $('#search-modal').attr('data-name');
   var songs = findSongs(playlist);
-  var newSong = event.target.value;
-  console.log("firebase push ", newSong);
-  
+  if(songs[0] == 'blank') {
+    songs = [];
+  }
+  var newSong = ajaxData.items[event.target.value].id.videoId;
+  songs.push(newSong);
+  dataRef.ref("Playlists").child(playlist).set(songs);
+  alert('Song Added');
 });
 
 //onclick for add to playlist button
-$(".addToPlaylistbtn").on("click", function (event) {
+$("#addToPlaylistbtn").on("click", function (event) {
   event.preventDefault();
-  console.log(event);
+  // console.log(event);
   var userInput = $('#user-text').val()
-  console.log(userInput)
+  // console.log(userInput)
   //Take user-text and add Playlist to database
   dataRef.ref().child("Playlists").child(userInput).set({0:'blank'});
 });
@@ -172,10 +176,10 @@ $(".addToPlaylistbtn").on("click", function (event) {
 var x = 1; //playlist increment
 
 dataRef.ref().child("Playlists").on("child_added", function(childSnapshot) {
-  console.log("in dataref child");
+  // console.log("in dataref child");
   //console.log(childSnapshot.val().child());
-  console.log(childSnapshot.key);
-  console.log(childSnapshot.val());
+  // console.log(childSnapshot.key);
+  // console.log(childSnapshot.val());
 var playListName = childSnapshot.key
 
    $('.accordion').append(`<div class="card">
@@ -203,7 +207,7 @@ for (var z=0; z<childSnapshot.val().length;z++){
 }
    $('.accordion').append(` <div class="row">
    <div class="col-md-12">
-     <button id='modal-search-btn' class="btn btn-primary" data-target="#search-modal" data-toggle="modal" data-listName=`+ playListName + `>Add Music</button>
+     <button id="modal-search-btn" class="btn btn-primary" data-target="#search-modal" data-toggle="modal" data-listName="`+ playListName + `">Add Music</button>
    </div>
  </div>
  </div>`
@@ -211,8 +215,10 @@ for (var z=0; z<childSnapshot.val().length;z++){
     x= x+1;
   });
 
-  $('#modal-search-btn').on('click', function () {
-    $('#search-modal').modal('toggle');
+
+  $(document).on('click', '#modal-search-btn', function () {
+    // $('#search-modal').modal('toggle');
+    console.log($(this).attr('data-listName'));
     $('#search-modal').attr('data-name', $(this).attr('data-listName'));
    })
 
@@ -229,3 +235,9 @@ for (var z=0; z<childSnapshot.val().length;z++){
     })
     return songs;
   }
+
+  $('#close-search').on('click', function (){
+    window.location.reload();
+  })
+
+});
