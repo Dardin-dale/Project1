@@ -90,12 +90,63 @@ $(document).ready(function () {
   })
 
   //plays songs from the playlist
-  $('.playlist').on('click', function() {
+  $(document).on('click', '.playlist', function() {
+    //TODO: change existing player if already exists
     var listName = $(this).text();
+    // console.log('clicked');
     //grab the list and play a random song
-    libref.child(listName).once('value', function(snap) {
-      
-    })
+    var songs = findSongs(listName);
+    //youtube plays only after the random son selected in the playlist
+    //TODO: workaround random
+    // var randSong = findRandSong(listName);
+    player = new YT.Player('player', {
+      height: '200',
+      width: '320',
+      videoId: songs[0],
+      playerVars: {rel: 0, playlist: songs.slice(1)},
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+
   })
+
+  //Player API Calls
+  function onPlayerReady(event) {
+    event.target.playVideo();
+  }
+
+  // 5. The API calls this function when the player's state changes.
+  //    The function indicates that when playing a video (state=1),
+  //    the player should play for six seconds and then stop.
+  var done = false;
+  function onPlayerStateChange(event) {
+    if (event.data === 0) {
+      done = true;
+    }
+  }
+
+  function stopVideo() {
+    player.stopVideo();
+  }
+
+  //finds songs in names returns array of video tags
+  function findSongs(name) {
+    var songs = [];
+    libref.child(name).once('value', function(snap) {
+      snap.forEach(function (song) {
+        // console.log(song.val());
+        songs.push(song.val());
+      })
+    })
+    return songs;
+  }
+
+  //finds random song from playlist name
+  function findRandSong(name) {
+    var songs = findSongs(name);
+    return songs[Math.floor(songs.length*Math.random())];
+  }
 
 })

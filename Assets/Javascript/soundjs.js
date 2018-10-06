@@ -1,12 +1,11 @@
-
-
 $(document).on('ready', function () {
   var ajaxData;
-  //TODO: Add YouTube API configs
+  
   function buildQueryURL() {
     var queryURL = "https://www.googleapis.com/youtube/v3/search?";
     var queryParams = {
-      "part": "snippet"
+      "part": "snippet",
+      "format": "5"
     };
 
     //  TODO: parseInt for maxResults
@@ -99,8 +98,6 @@ $(document).on('ready', function () {
   //   console.log('card id', $(this).attr('id'));
   // })
 
-
-
   // Function to empty out the videos
   function clear() {
     $("#video-section").empty();
@@ -152,11 +149,9 @@ $(document).on("click", ".list-group-item", function (event) {
   console.log('card id', $(this).attr('id'));
 })
 //Code for pushing to database 
-// ALDO HELPED HERE>>>>>>>>>>>>>
 var dataRef = firebase.database();
 $(document).on("click", ".addSongtoPlaylistbtn", function (event) {
   console.log(event.target.value, "attach a string to this thing")
-
   dataRef.ref().push(ajaxData.items[event.target.value])
   event.preventDefault();
   console.log("firebase push ", event);
@@ -169,20 +164,54 @@ $("#addToPlaylistbtn").on("click", function (event) {
   console.log(event);
   var userInput = $('#user-text').val()
   console.log(userInput)
-
-  var videoArray = [0];
-  //TODO: Input starter youtube id for the user that they can delete later 
-  //dataRef.ref().child("Playlists").child(userInput).set({songs: []}) //ARRON's
- // dataRef.ref().child("Playlists").child(userInput).push({songs:0});//ATTACK2
-  dataRef.ref().child("Playlists").push({userInput,videoArray});
-  //$("#playList1").text(userInput);
-
+  //Take user-text and add Playlist to database
+  dataRef.ref().child("Playlists").child(userInput).set({0:'blank'});
 });
 
-//TODO: create firebase event listener for user playlists
-// reference the childsnapshot data
-// dynamically create card that will live inside of the accordion
-// 
-$('#modal-search-btn').on('click', function () {
-  $('#search-modal').modal('toggle');
-})
+var x = 1; //playlist increment
+
+dataRef.ref().child("Playlists").on("child_added", function(childSnapshot) {
+  console.log("in dataref child");
+  //console.log(childSnapshot.val().child());
+  console.log(childSnapshot.key);
+  console.log(childSnapshot.val());
+var playListName = childSnapshot.key
+
+   $('.accordion').append(`<div class="card">
+      <div class="card-header" id="headingOne">
+      <h5 class="mb-0">'
+      <button class="btn btn-link" id="playList1"
+      type="button" data-toggle="collapse" 
+      data-target="#collapse${x}" aria-expanded="true" 
+      aria-controls="collapseOne">
+         ${playListName}
+        </button>
+        </h5>
+      </div>`)
+//for each loop for songs in array
+for (var z=0; z<childSnapshot.val().length;z++){
+  var videoID = childSnapshot[z];
+  console.log(videoID);
+      $('.accordion').append(`  
+      <div id="collapse${x}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+      <iframe class="ytplayer" type="text/html" width="200" height="100" 
+      src="https://www.youtube.com/embed/${videoID}" frameborder='0' allowfullscreen>
+      </div></div>`
+   )
+}
+   $('.accordion').append(` <div class="row">
+   <div class="col-md-12">
+     <button id='modal-search-btn' class="btn btn-primary" data-target="#search-modal" data-toggle="modal">Search Music</button>
+   </div>
+ </div>
+ </div>`
+ )
+    x= x+1;
+  });
+
+  $('#modal-search-btn').on('click', function () {
+    $('#search-modal').modal('toggle');
+   })
+
+
