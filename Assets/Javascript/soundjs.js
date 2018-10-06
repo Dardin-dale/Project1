@@ -39,6 +39,7 @@ $(document).on('ready', function () {
 
 
 
+
       //   // Increase the videoCount (track video # - starting at 1)
       console.log("inside video to page")
 
@@ -62,8 +63,7 @@ $(document).on('ready', function () {
 
       //         if (headline && item.snippet.channelTitle) {
       console.log(item.snippet.channelTitle);
-      $videoListItem.append(
-        $("<p>")
+      $videoListItem.append($("<p>")
           .append($playListbutton)
           .append(
             $("<p>").text(headline)
@@ -179,7 +179,7 @@ var playListName = childSnapshot.key
 
    $('.accordion').append(`<div class="card">
       <div class="card-header" id="headingOne">
-      <h5 class="mb-0">'
+      <h5 class="mb-0">
       <button class="btn btn-link" id="playList1"
       type="button" data-toggle="collapse" 
       data-target="#collapse${x}" aria-expanded="true" 
@@ -190,7 +190,7 @@ var playListName = childSnapshot.key
       </div>`)
 //for each loop for songs in array
 for (var z=0; z<childSnapshot.val().length;z++){
-  var videoID = childSnapshot[z];
+  var videoID = childSnapshot.val()[z];
   console.log(videoID);
       $('.accordion').append(`  
       <div id="collapse${x}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -202,7 +202,7 @@ for (var z=0; z<childSnapshot.val().length;z++){
 }
    $('.accordion').append(` <div class="row">
    <div class="col-md-12">
-     <button id='modal-search-btn' class="btn btn-primary" data-target="#search-modal" data-toggle="modal">Search Music</button>
+     <button id='modal-search-btn' class="btn btn-primary" data-target="#search-modal" data-toggle="modal">Add Music</button>
    </div>
  </div>
  </div>`
