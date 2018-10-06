@@ -37,6 +37,10 @@ hr{
   background: none;
 }
 
+.playlist {
+  margin: 5px;
+}
+
 #content-card{
   background: none;
 }

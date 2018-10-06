@@ -94,11 +94,16 @@ $(document).ready(function () {
     //TODO: change existing player if already exists
     var listName = $(this).text();
     // console.log('clicked');
-    //grab the list and play a random song
     var songs = findSongs(listName);
     //youtube plays only after the random son selected in the playlist
     //TODO: workaround random
     // var randSong = findRandSong(listName);
+    
+    //switches player if already playing
+    if ($('#player').is('iframe')) {
+      $('#play-shell').empty();
+      $('#play-shell').append($('<div id="player">'));
+    }
     player = new YT.Player('player', {
       height: '200',
       width: '320',
@@ -109,6 +114,7 @@ $(document).ready(function () {
         'onStateChange': onPlayerStateChange
       }
     });
+    
 
   })
 
@@ -144,6 +150,7 @@ $(document).ready(function () {
   }
 
   //finds random song from playlist name
+  //not currently used due to yt api functionality
   function findRandSong(name) {
     var songs = findSongs(name);
     return songs[Math.floor(songs.length*Math.random())];
