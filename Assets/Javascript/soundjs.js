@@ -151,15 +151,16 @@ $(document).on("click", ".list-group-item", function (event) {
 //Code for pushing to database 
 var dataRef = firebase.database();
 $(document).on("click", ".addSongtoPlaylistbtn", function (event) {
-  console.log(event.target.value, "attach a string to this thing")
-  dataRef.ref().push(ajaxData.items[event.target.value])
   event.preventDefault();
-  console.log("firebase push ", event);
-  firebase.database().ref('playlist').push(event)
+  var playlist = $('#search-modal').attr('data-name');
+  var songs = findSongs(playlist);
+  var newSong = event.target.value;
+  console.log("firebase push ", newSong);
+  
 });
 
 //onclick for add to playlist button
-$("#addToPlaylistbtn").on("click", function (event) {
+$(".addToPlaylistbtn").on("click", function (event) {
   event.preventDefault();
   console.log(event);
   var userInput = $('#user-text').val()
@@ -202,7 +203,7 @@ for (var z=0; z<childSnapshot.val().length;z++){
 }
    $('.accordion').append(` <div class="row">
    <div class="col-md-12">
-     <button id='modal-search-btn' class="btn btn-primary" data-target="#search-modal" data-toggle="modal">Add Music</button>
+     <button id='modal-search-btn' class="btn btn-primary" data-target="#search-modal" data-toggle="modal" data-listName=`+ playListName + `>Add Music</button>
    </div>
  </div>
  </div>`
@@ -212,6 +213,19 @@ for (var z=0; z<childSnapshot.val().length;z++){
 
   $('#modal-search-btn').on('click', function () {
     $('#search-modal').modal('toggle');
+    $('#search-modal').attr('data-name', $(this).attr('data-listName'));
    })
 
-
+  //finds songs in names returns array of video tags
+  
+  function findSongs(name) {
+    var libref = dataRef.ref().child('Playlists');
+    var songs = [];
+    libref.child(name).once('value', function(snap) {
+      snap.forEach(function (song) {
+        // console.log(song.val());
+        songs.push(song.val());
+      })
+    })
+    return songs;
+  }
