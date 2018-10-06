@@ -131,7 +131,7 @@ $(document).on('ready', function () {
     })
     //.then(updatePage)
   })
-});
+
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyA7u4I8S7T1qOUo7iFhdSfW0qLx1xi3Mxg",
@@ -151,11 +151,10 @@ $(document).on("click", ".list-group-item", function (event) {
 //Code for pushing to database 
 var dataRef = firebase.database();
 $(document).on("click", ".addSongtoPlaylistbtn", function (event) {
-  console.log(event.target.value, "attach a string to this thing")
-  dataRef.ref().push(ajaxData.items[event.target.value])
+  console.log(event.target.value, "attach a string to this thing");
+  dataRef.ref("Playlists").child("test").set(ajaxData.items[event.target.value])
   event.preventDefault();
   console.log("firebase push ", event);
-  firebase.database().ref('playlist').push(event)
 });
 
 //onclick for add to playlist button
@@ -212,6 +211,6 @@ for (var z=0; z<childSnapshot.val().length;z++){
 
   $('#modal-search-btn').on('click', function () {
     $('#search-modal').modal('toggle');
-   })
+   });
 
-
+  });
