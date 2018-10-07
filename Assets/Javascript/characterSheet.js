@@ -340,34 +340,34 @@ $("#save-save").on("click", function (event) {
     }
 });
 
-//Roll Button function
-$('#roll-button').on('click', function() {
-    //roll 4 6-sided die and record the cumulative total of the highest 3 dice 6 times
+// Roll Button function
+$('#roll-button').on('click', function () {
+    // roll 4 6-sided die and record the cumulative total of the highest 3 dice 6 times
     var rolls = [];
-    for(var i = 0; i <= 5; i++) {
+    for (var i = 0; i <= 5; i++) {
       var stat = [];
-      for(var j=0; j<=3; j++){
-        stat.push(Math.floor(6*Math.random()) + 1);
+      for (var j = 0; j <= 3; j++) {
+        stat.push(Math.floor(6 * Math.random()) + 1);
       }
       var min = Math.min(stat);
       stat.splice(stat.indexOf(min), 1);
       var sum = 0;
-      for(var k = 0; k < stat.length; k++ ){
-        sum += stat[k]; 
+      for(var k = 0; k < stat.length; k++) {
+        sum += stat[k];
       }
       rolls.push(sum);
     }
     
     $('#rollys').empty();
-    var newP = $('<p>').text('Rolled Values: '+ rolls);
+    var newP = $('<p>').text('Rolled Values: ' + rolls);
     $('#rollys').append(newP);
     
 })
 
-$('#newChar').on('click', function(){
-    window.location.href='characterSheet.html';
+$('#newChar').on('click', function() {
+    window.location.href = 'characterSheet.html';
 })
 
-$('#home').on('click', function(){
-    window.location.href='index.html';
-})
+$('#home').on('click', function() {
+    window.location.href = 'index.html';
+});
