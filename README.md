@@ -9,19 +9,19 @@ playback features.
 
 the home page organizes the character sheets and YouTube playlist buttons. It is designed to be used during your play session! simply click on the character sheet you want to view and the atmospheric effect button that you want to play. 
 
-![picture of home page] (../Assets/md/ddhome.png)
+![picture of home page] (https://github.com/Dardin-dale/Project1/Assets/md/ddhome.png)
 
 ## Character Sheet
 
 The character sheet currently supports 5e characters and utilizes the 5e API to help auto-fill your character's traits.
 
-![character sheet form] (../Assets/md/ddchar.png)
+![character sheet form] (https://github.com/Dardin-dale/Project1/Assets/md/ddchar.png)
 
 ## Video Library
 
 The video library lets you create playlists that add buttons to the home page and search YouTube for your favorite videos to create unique atmospheric effects for your play session.
 
-![video Library Page] (../Assets/md/ddlib.png)
+![video Library Page] (https://github.com/Dardin-dale/Project1/Assets/md/ddlib.png)
 
 ## In Progress Features
 
