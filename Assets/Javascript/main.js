@@ -114,7 +114,7 @@ $(document).ready(function () {
         'onStateChange': onPlayerStateChange
       }
     });
-    
+    console.log(songs.slice(1));
 
   })
 
