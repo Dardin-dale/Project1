@@ -5,6 +5,8 @@ This is a demo app is used to help a Game master organize character information 
 D&D 5e as well as utilize YouTube API to create custom atmospheric effects with instant 
 playback features.
 
+https://dardin-dale.github.io/Project1/
+
 ## Home Page
 
 the home page organizes the character sheets and YouTube playlist buttons. It is designed to be used during your play session! simply click on the character sheet you want to view and the atmospheric effect button that you want to play. 
